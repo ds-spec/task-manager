@@ -4,13 +4,19 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { FaSquareCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
+import { auth } from "../../firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const LoginForm = () => {
   const [isAgreed, setIsAgreed] = useState(false);
-  const [formData, setFormData] = useState(null);
   const [isAccount, setIsAccount] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [invalidUser, setInvalidUser] = useState(false);
   console.log(isAccount);
   const {
     register,
@@ -19,44 +25,45 @@ const LoginForm = () => {
     reset,
   } = useForm();
 
-  const onSubmit = (data) => {
-    setFormData(data);
+  const onSubmit = async (data) => {
     setIsCreating(true);
+    if (!data) return;
+    try {
+      const { email, password } = data;
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(response.user);
+      setIsAccount(true);
+      setIsAgreed(false);
+      setIsCreating(false);
+      reset();
+    } catch (err) {
+      setIsCreating(false);
+      setIsError(true);
+      console.log(err);
+    }
+  };
+
+  const handleLoginData = async (data) => {
+    if (!data) return;
+    const { email, password } = data;
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      console.log(response.user, "User logged in");
+      reset();
+    } catch (err) {
+      console.log(err);
+      setInvalidUser(true);
+      console.log("Invalid email or password");
+    }
   };
 
   const handleCheckboxChange = (e) => {
     setIsAgreed(e.target.checked);
   };
-
-  useEffect(() => {
-    const handleFormData = async (data) => {
-      if (!data) return;
-      try {
-        const response = await fetch(
-          "https://66fb2a188583ac93b40b071a.mockapi.io/createaccount",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-          }
-        );
-        const result = await response.json();
-        console.log(result);
-        // setTimeout(() => {
-        //   setIsAccount(true);
-        // }, 5000);
-        setIsAccount(true);
-        setIsAgreed(false);
-        setIsCreating(false);
-        reset();
-      } catch (err) {
-        setIsCreating(false);
-        setIsError(true);
-        console.log(err);
-      }
-    };
-    handleFormData(formData);
-  }, [formData, isAgreed, reset]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -80,38 +87,52 @@ const LoginForm = () => {
             <div></div>
           </div>
         ) : (
-          <form id="form" onSubmit={handleSubmit(onSubmit)}>
-            <h1>Create an account</h1>
-            <h4>
-              Already have an account? <span>Log in</span>
-            </h4>
+          <form
+            id="form"
+            onSubmit={handleSubmit(isLogin ? handleLoginData : onSubmit)}
+          >
+            <h1>{isLogin ? "Login your account" : "Create an account"}</h1>
+            {isLogin ? (
+              <h4>
+                Dont have an account?{" "}
+                <span onClick={() => setIsLogin(false)}>Create Account</span>
+              </h4>
+            ) : (
+              <h4>
+                Already have an account?{" "}
+                <span onClick={() => setIsLogin(true)}>Log in</span>
+              </h4>
+            )}
             <div id="input-div">
-              <div id="name-div">
-                <div className="name-error">
-                  <input
-                    id="username"
-                    type="text"
-                    placeholder="First Name"
-                    {...register("firstName", { required: true })}
-                  />
-                  {errors?.firstName?.type === "required" && (
-                    <p id="error">Please enter first name</p>
-                  )}
+              {!isLogin && (
+                <div id="name-div">
+                  <div className="name-error">
+                    <input
+                      id="username"
+                      type="text"
+                      placeholder="First Name"
+                      {...register("firstName", { required: true })}
+                    />
+                    {errors?.firstName?.type === "required" && (
+                      <p id="error">Please enter first name</p>
+                    )}
+                  </div>
+                  <div className="name-error">
+                    <input
+                      type="text"
+                      placeholder="Second Name"
+                      {...register("secondName", { required: true })}
+                    />
+                    {errors?.secondName?.type === "required" && (
+                      <p id="error"> Please enter second name</p>
+                    )}
+                  </div>
                 </div>
-                <div className="name-error">
-                  <input
-                    type="text"
-                    placeholder="Second Name"
-                    {...register("secondName", { required: true })}
-                  />
-                  {errors?.secondName?.type === "required" && (
-                    <p id="error"> Please enter second name</p>
-                  )}
-                </div>
-              </div>
+              )}
               <div className="name-error">
                 <input
                   type="email"
+                  // value={email}
                   placeholder="Enter your email"
                   {...register("email", {
                     required: "Please enter a valid email",
@@ -135,26 +156,34 @@ const LoginForm = () => {
                 />
                 {errors.password && (
                   <p id="error">
-                    {errors.password.message || "Please enter password"}
+                    {invalidUser
+                      ? "Invalid username or password"
+                      : errors.password.message}
                   </p>
                 )}
               </div>
               {/* <h5> */}
-              <div id="check-box-div">
-                <input
-                  id="check"
-                  type="checkbox"
-                  onChange={handleCheckboxChange}
-                />
-                <h5>
-                  I agree to the<span>Terms & Conditions</span>
-                </h5>
-              </div>
+              {!isLogin && (
+                <div id="check-box-div">
+                  <input
+                    id="check"
+                    type="checkbox"
+                    onChange={handleCheckboxChange}
+                  />
+                  <h5>
+                    I agree to the<span>Terms & Conditions</span>
+                  </h5>
+                </div>
+              )}
               {/* </h5> */}
             </div>
-            <button disabled={!isAgreed} type="submit">
-              Create account
-            </button>
+            {isLogin ? (
+              <button type="submit">Login</button>
+            ) : (
+              <button disabled={!isAgreed} type="submit">
+                Create account
+              </button>
+            )}
             {isAccount && (
               <h5 id="account-created">
                 <FaSquareCheck />
