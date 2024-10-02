@@ -9,15 +9,32 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
+// Seperate error message
+const ErrorMessage = ({ message }) => <h5 id="account-error">{message}</h5>;
+
+// Seperate success message
+
+const SuccessMessage = ({ message }) => (
+  <h5 id="account-created">
+    <FaSquareCheck />
+    {message}
+  </h5>
+);
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [isAgreed, setIsAgreed] = useState(false);
   const [isAccount, setIsAccount] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [invalidUser, setInvalidUser] = useState(false);
+  const [userExists, setUserExists] = useState(false);
   console.log(isAccount);
+  console.log(isError, "errorrrr");
+  console.log(invalidUser, "invalidUserinvalidUser");
   const {
     register,
     handleSubmit,
@@ -25,57 +42,81 @@ const LoginForm = () => {
     reset,
   } = useForm();
 
-  const onSubmit = async (data) => {
-    setIsCreating(true);
-    if (!data) return;
-    try {
-      const { email, password } = data;
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(response.user);
-      setIsAccount(true);
-      setIsAgreed(false);
-      setIsCreating(false);
-      reset();
-    } catch (err) {
-      setIsCreating(false);
-      setIsError(true);
-      console.log(err);
+  const setSuccess = (message, type) => {
+    if (type === "login") {
+      setIsAccount(false);
+      navigate("/dashboard");
+    } else {
+      setIsAccount(false);
     }
+    reset();
+    setTimeout(() => setIsAccount(false), 3000); // Display success for 3 seconds
   };
 
-  const handleLoginData = async (data) => {
-    if (!data) return;
+  const setError = (message, type) => {
+    if (userExists) {
+      if (type === "login") {
+        setInvalidUser(true);
+      }
+      setIsError(true);
+      setTimeout(() => {
+        setInvalidUser(false);
+        setIsError(false);
+      }, 3000);
+    } else {
+      setTimeout(() => {
+        setUserExists(false);
+      }, 3000);
+    } // Display error for 3 seconds
+  };
+
+  const switchToCreateAccount = (type) => {
+    if (type === "register") {
+      setIsLogin(false);
+    } else {
+      setIsLogin(true);
+    }
+    reset();
+  };
+
+  const onSubmit = async (data) => handleAuthAction(data, "register");
+  const handleLoginData = async (data) => handleAuthAction(data, "login");
+
+  const handleAuthAction = async (data, action) => {
+    console.log(action, "actionsss");
+    setIsCreating(true);
     const { email, password } = data;
     try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
-      console.log(response.user, "User logged in");
-      reset();
-    } catch (err) {
-      console.log(err);
-      setInvalidUser(true);
-      console.log("Invalid email or password");
+      const response =
+        action === "register"
+          ? await createUserWithEmailAndPassword(auth, email, password)
+          : await signInWithEmailAndPassword(auth, email, password);
+      console.log(response.user);
+      setSuccess(
+        action === "register"
+          ? "Account Created Successfully"
+          : "User logged in",
+        action
+      );
+    } catch (error) {
+      console.log(error.code, "codeerrro");
+      if (error.code === "auth/email-already-in-use") {
+        setUserExists(true);
+      }
+      setError(
+        action === "register"
+          ? "Something went wrong"
+          : "Invalid email or password",
+        action
+      );
+    } finally {
+      setIsCreating(false);
     }
   };
 
   const handleCheckboxChange = (e) => {
     setIsAgreed(e.target.checked);
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsError(false);
-    }, 2000);
-  }, [isError]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsAccount(false);
-    }, 2000);
-  }, [isAccount]);
 
   return (
     <div id="loginpage">
@@ -94,13 +135,17 @@ const LoginForm = () => {
             <h1>{isLogin ? "Login your account" : "Create an account"}</h1>
             {isLogin ? (
               <h4>
-                Dont have an account?{" "}
-                <span onClick={() => setIsLogin(false)}>Create Account</span>
+                Don't have an account?{" "}
+                <span onClick={() => switchToCreateAccount("register")}>
+                  Create Account
+                </span>
               </h4>
             ) : (
               <h4>
                 Already have an account?{" "}
-                <span onClick={() => setIsLogin(true)}>Log in</span>
+                <span onClick={() => switchToCreateAccount("login")}>
+                  Log in
+                </span>
               </h4>
             )}
             <div id="input-div">
@@ -154,13 +199,8 @@ const LoginForm = () => {
                     },
                   })}
                 />
-                {errors.password && (
-                  <p id="error">
-                    {invalidUser
-                      ? "Invalid username or password"
-                      : errors.password.message}
-                  </p>
-                )}
+                {errors.password && <p id="error">{errors.password.message}</p>}
+                {invalidUser && <p id="error">Invalid username or password</p>}
               </div>
               {/* <h5> */}
               {!isLogin && (
@@ -185,16 +225,11 @@ const LoginForm = () => {
               </button>
             )}
             {isAccount && (
-              <h5 id="account-created">
-                <FaSquareCheck />
-                Account Created Successfully
-              </h5>
+              <SuccessMessage message="Account Created Successfully" />
             )}
-            {isError && (
-              <h5 id="account-error">
-                <MdError />
-                Something went wrong
-              </h5>
+            {isError && <ErrorMessage message="Something went wrong" />}
+            {userExists && (
+              <ErrorMessage message="Email is already in use. Please use a different email or log in." />
             )}
           </form>
         )}
