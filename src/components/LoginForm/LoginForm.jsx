@@ -4,12 +4,14 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { FaSquareCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 
 // Seperate error message
 const ErrorMessage = ({ message }) => <h5 id="account-error">{message}</h5>;
@@ -25,6 +27,7 @@ const SuccessMessage = ({ message }) => (
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const db = getFirestore();
   const [isAgreed, setIsAgreed] = useState(false);
   const [isAccount, setIsAccount] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
@@ -47,18 +50,21 @@ const LoginForm = () => {
       setIsAccount(false);
       navigate("/dashboard");
     } else {
-      setIsAccount(false);
+      setIsAccount(true);
     }
     reset();
     setTimeout(() => setIsAccount(false), 3000); // Display success for 3 seconds
   };
 
   const setError = (message, type) => {
-    if (userExists) {
+    if (!userExists) {
       if (type === "login") {
         setInvalidUser(true);
+        setIsError(false);
+      } else {
+        setInvalidUser(false);
+        setIsError(true);
       }
-      setIsError(true);
       setTimeout(() => {
         setInvalidUser(false);
         setIsError(false);
@@ -85,13 +91,19 @@ const LoginForm = () => {
   const handleAuthAction = async (data, action) => {
     console.log(action, "actionsss");
     setIsCreating(true);
-    const { email, password } = data;
+    const { email, password, firstName } = data;
+    console.log(data);
     try {
       const response =
         action === "register"
           ? await createUserWithEmailAndPassword(auth, email, password)
           : await signInWithEmailAndPassword(auth, email, password);
       console.log(response.user);
+      if (action === "register") {
+        await addDoc(collection(db, "users"), {
+          displayName: firstName,
+        });
+      }
       setSuccess(
         action === "register"
           ? "Account Created Successfully"

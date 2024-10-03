@@ -1,0 +1,49 @@
+#main {
+  min-height: 100vh;
+  background-color: #000000;
+  color: #fff;
+  padding: 0.1px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+#nav-box {
+  margin: 2vw 2vw;
+  width: 18vw;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
+#task-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.tasks {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  cursor: pointer;
+  padding: 1.2vw 1vw;
+}
+
+.active {
+  background-color: #0f0f0f;
+}
+
+.tasks h5 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+img {
+  width: 25px;
+  color: white;
+}
+
+#line {
+  width: 1px;
+  height: 48px;
+  background-color: #fff;
+}
