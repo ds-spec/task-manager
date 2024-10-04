@@ -100,10 +100,11 @@ const LoginForm = () => {
           : await signInWithEmailAndPassword(auth, email, password);
       console.log(response.user);
       if (action === "register") {
-        await addDoc(collection(db, "users"), {
+        await setDoc(doc(db, "users", user.uid), {
           displayName: firstName,
         });
       }
+
       setSuccess(
         action === "register"
           ? "Account Created Successfully"

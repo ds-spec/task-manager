@@ -21,8 +21,10 @@ const AuthProvider = ({ children }) => {
         const userDocSnap = await getDoc(userDocRef);
         if (userDocSnap.exists()) {
           const userData = userDocSnap.data();
+          console.log("Firestore Data:", userData);
           setCurrentUser({ ...user, ...userData });
         } else {
+          console.log("No such document in Firestore");
           setCurrentUser(user);
         }
       } else {

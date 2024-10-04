@@ -1,0 +1,71 @@
+#tasks {
+  margin-top: 2.5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5vw;
+}
+
+#tasksDisplay {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#tasksDisplay h4 {
+  color: #acaaaa;
+  font-weight: 400;
+}
+
+#number-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#number-tasks h1 {
+  font-size: 1.8vw;
+}
+
+#number-tasks span {
+  color: #439578;
+}
+
+#search-bar {
+  position: relative;
+}
+
+#search-bar img {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1vw;
+}
+
+#search-bar input {
+  width: 30vw;
+  height: 1vw;
+  font-size: 1vw;
+  padding: 1.7vw 3vw;
+  background-color: #151515;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  color: #686868;
+}
+
+#tasks-schedule {
+  margin-top: 1.4vw;
+  margin-left: 2.5vw;
+  display: flex;
+  gap: 2.9vw;
+}
+
+.newSchedule {
+  color: #6A6C69;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.schedule {
+  color: #d0d0d0;
+}

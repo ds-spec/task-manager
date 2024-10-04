@@ -4,6 +4,8 @@ import tasks from "./tasks.png";
 import schedule from "./schedule.png";
 import timer from "./timer.png";
 import settings from "./settings.png";
+import search from "./search.png";
+import menu from "./menu.png";
 
 const assets = {
   desert: deserts,
@@ -12,6 +14,8 @@ const assets = {
   schedule: schedule,
   timer: timer,
   settings: settings,
+  search: search,
+  menu: menu,
 };
 
 export default assets;

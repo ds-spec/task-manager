@@ -1,0 +1,49 @@
+#task-list {
+  overflow-y: auto;
+  height: 42vh;
+}
+#task-card {
+  width: 30vw;
+  height: 15vw;
+  margin-top: 2vw;
+  border-radius: 5px;
+  padding: 2vw 2.5vw;
+  position: relative;
+}
+
+#task-card h3 {
+  color: #000;
+  font-weight: 900;
+  font-size: 1.5vw;
+}
+
+#task-card p {
+  color: #101010bf;
+  margin-top: 1.2vw;
+  font-weight: 400;
+}
+#task-card img {
+  position: absolute;
+  top: 2vw;
+  right: 2vw;
+  cursor: pointer;
+}
+
+#progress-bar {
+  margin-top: 5vw;
+  display: flex;
+}
+
+#progress {
+  width: 20vw;
+  height: 5px;
+  border-radius: 20px;
+  background-color: rgba(128, 128, 128, 0.508);
+}
+
+#progress-track {
+  width: 75%;
+  height: 5px;
+  border-radius: 20px;
+  background-color: #fff;
+}

@@ -4,6 +4,9 @@
   --text-color: #fff;
   --background-color: #000;
 }
+::-webkit-scrollbar {
+  display: none;
+}
 
 * {
   margin: 0;
