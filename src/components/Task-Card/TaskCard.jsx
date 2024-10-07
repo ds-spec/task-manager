@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./TaskCard.css";
 import assets from "../../assets/assets";
 import { useAuth } from "../../AuthProvider";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 
 const TaskCard = () => {
@@ -10,22 +16,21 @@ const TaskCard = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    const fetchTaskCards = async () => {
-      const q = query(
-        collection(db, "tasks"),
-        where("userId", "==", currentUser?.uid)
-      );
-      const querySnapshot = await getDocs(q);
-      console.log(querySnapshot, "querySnapshotquerySnapshot");
-      const fetchedTasks = querySnapshot.docs.map((doc) => ({
-        // id: doc.id,
+    if (!currentUser.uid) return;
+    // const fetchTaskCards = async () => {
+    const q = query(
+      collection(db, "tasks"),
+      where("userId", "==", currentUser?.uid)
+    );
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const fetchedTasks = snapshot.docs.map((doc) => ({
         ...doc.data(),
       }));
       console.log(fetchedTasks, "fetchedTasks");
       setTaskCards(fetchedTasks);
-    };
-    fetchTaskCards();
-  }, []);
+    });
+    return () => unsubscribe();
+  }, [currentUser?.uid]);
 
   console.log(currentUser);
   console.log(taskCards);

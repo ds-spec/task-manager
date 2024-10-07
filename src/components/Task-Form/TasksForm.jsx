@@ -9,6 +9,7 @@ import { db } from "../../firebase";
 
 const TasksForm = ({ setAddTask }) => {
   const { currentUser } = useAuth();
+  const [backgroundColor, setBackgroundColor] = useState();
   console.log(currentUser);
   const [priorityShow, setPriorityShow] = useState(false);
   const [disabled, setDisabled] = useState(false);
@@ -31,7 +32,7 @@ const TasksForm = ({ setAddTask }) => {
         taskName: data?.taskname,
         taskDescription: data?.taskdescription,
         userId: currentUser?.uid,
-        backgroundColor: "blue",
+        backgroundColor: backgroundColor,
         taskCompleted: "20%",
       });
     } catch (error) {
@@ -67,11 +68,31 @@ const TasksForm = ({ setAddTask }) => {
           id="description"
         />
         <div id="color-palette">
-          <div id="color-orange"></div>
-          <div id="color-red"></div>
-          <div id="color-purple"></div>
-          <div id="color-blue"></div>
-          <div id="color-green"></div>
+          <div
+            tabindex="0"
+            id="color-orange"
+            onClick={() => setBackgroundColor("#f5390f")}
+          ></div>
+          <div
+            tabindex="0"
+            id="color-red"
+            onClick={() => setBackgroundColor("red")}
+          ></div>
+          <div
+            tabindex="0"
+            id="color-purple"
+            onClick={() => setBackgroundColor("rgb(206, 19, 206)")}
+          ></div>
+          <div
+            tabindex="0"
+            id="color-blue"
+            onClick={() => setBackgroundColor("#a4b4ff")}
+          ></div>
+          <div
+            tabindex="0"
+            id="color-green"
+            onClick={() => setBackgroundColor("green")}
+          ></div>
         </div>
         <div id="priority-div">
           <button onClick={(e) => preventReload(e)} id="priority-btn">

@@ -101,15 +101,15 @@ const LoginForm = () => {
           : await signInWithEmailAndPassword(auth, email, password);
       // console.log(response.user);
       console.log(response.user.uid, "uid in response");
-      // if (action === "register") {
       // console.log(response.user.uid,"uid in response");
       // await setDoc(doc(db, "users", response.user.uid), {
       //   displayName: firstName,
-      // });
-      await setDoc(doc(db, "users", response.user.uid), {
-        firstName: firstName,
-        lastName: secondName,
-      });
+      if (action === "register") {
+        await setDoc(doc(db, "users", response.user.uid), {
+          firstName: firstName,
+          lastName: secondName,
+        });
+      }
 
       console.log(response.user.uid, "uid in response");
       // }
