@@ -3,8 +3,13 @@ import "./TaskForm.css";
 import { IoFlagOutline } from "react-icons/io5";
 import { FaFlag } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { useAuth } from "../../AuthProvider";
+import { db } from "../../firebase";
 
 const TasksForm = ({ setAddTask }) => {
+  const { currentUser } = useAuth();
+  console.log(currentUser);
   const [priorityShow, setPriorityShow] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const {
@@ -19,6 +24,21 @@ const TasksForm = ({ setAddTask }) => {
     setPriorityShow(!priorityShow);
   };
   const taskName = watch("task-name");
+
+  const handleCreateTask = async (data) => {
+    try {
+      await addDoc(collection(db, "tasks"), {
+        taskName: data?.taskname,
+        taskDescription: data?.taskdescription,
+        userId: currentUser?.uid,
+        backgroundColor: "blue",
+        taskCompleted: "20%",
+      });
+    } catch (error) {
+      console.log("Error creating task: ", error.message);
+    }
+  };
+
   useEffect(() => {
     if (taskName === "") {
       setDisabled(true);
@@ -27,7 +47,8 @@ const TasksForm = ({ setAddTask }) => {
   // console.log(taksName, "flkfnef");
   const createTask = (data) => {
     console.log(data);
-    console.log(formState);
+    handleCreateTask(data);
+    // console.log(formState);
     setAddTask(false);
   };
   return (
@@ -36,13 +57,13 @@ const TasksForm = ({ setAddTask }) => {
         <input
           type="text"
           placeholder="Task name"
-          {...register("task-name")}
+          {...register("taskname")}
           id="taskHead"
         />
         <input
           type="text"
           placeholder="Description"
-          {...register("task-description")}
+          {...register("taskdescription")}
           id="description"
         />
         <div id="color-palette">
