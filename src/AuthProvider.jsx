@@ -13,9 +13,11 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      console.log(`User: ${JSON.stringify(user)}`);
       // setCurrentUser(user);
       // setLoading(false);
       if (user) {
+        // const userDocRef = doc(db, "users", user.uid);
         const userDocRef = doc(db, "users", user.uid);
         console.log(userDocRef, "docccReefff");
         const userDocSnap = await getDoc(userDocRef);

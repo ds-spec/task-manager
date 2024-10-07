@@ -42,10 +42,10 @@
 }
 
 #search-bar input {
-  width: 30vw;
+  width: 35vw;
   height: 1vw;
   font-size: 1vw;
-  padding: 1.7vw 3vw;
+  padding: 1.7vw 3.5vw;
   background-color: #151515;
   border: none;
   border-radius: 8px;

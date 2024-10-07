@@ -6,6 +6,10 @@ import timer from "./timer.png";
 import settings from "./settings.png";
 import search from "./search.png";
 import menu from "./menu.png";
+import profile from "./profile.png";
+import notification from "./notification.png";
+import message from "./message.png";
+import playTimer from "./play_timer.png";
 
 const assets = {
   desert: deserts,
@@ -16,6 +20,10 @@ const assets = {
   settings: settings,
   search: search,
   menu: menu,
+  profile: profile,
+  notification: notification,
+  message: message,
+  playTimer: playTimer,
 };
 
 export default assets;

@@ -4,7 +4,7 @@
   color: #fff;
   padding: 0.1px;
   display: grid;
-  grid-template-columns: 1fr 1.8fr 1fr;
+  grid-template-columns: 1fr 1.8fr 1.4fr;
 }
 #nav-box {
   margin: 2vw 2vw;
@@ -29,7 +29,7 @@
 }
 
 .active {
-  background-color: #3E3D3C;
+  background-color: #3e3d3c;
 }
 
 .tasks h5 {

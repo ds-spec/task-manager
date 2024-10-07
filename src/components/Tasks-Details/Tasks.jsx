@@ -3,6 +3,7 @@ import { useAuth } from "../../AuthProvider";
 import "./Tasks.css";
 import assets from "../../assets/assets";
 import TaskCard from "../Task-Card/TaskCard";
+import ProfileTime from "../Profile-Time/ProfileTime";
 
 const Tasks = () => {
   const [schedule, setSchedule] = useState(0);
@@ -14,7 +15,7 @@ const Tasks = () => {
   return (
     <div id="tasks">
       <div id="tasksDisplay">
-        <h4>Hello, John !</h4>
+        <h4>Hello, {currentUser?.firstName} !</h4>
         <div id="number-tasks">
           <h1>You've got</h1>
           <h1>

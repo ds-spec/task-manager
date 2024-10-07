@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Dashboard.css";
 import assets from "../../assets/assets";
 import Tasks from "../Tasks-Details/Tasks";
+import ProfileTime from "../Profile-Time/ProfileTime";
 
 const Dashboard = () => {
   const [activeTask, setActiveTask] = useState(0);
@@ -61,6 +62,7 @@ const Dashboard = () => {
         </div>
       </div>
       <Tasks />
+      <ProfileTime />
     </div>
   );
 };

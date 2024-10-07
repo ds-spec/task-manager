@@ -1,13 +1,15 @@
 #task-list {
+  margin-top: -35px;
   overflow-y: auto;
-  height: 42vh;
+  height: 45vh;
+  width: 37vw;
 }
 #task-card {
-  width: 30vw;
-  height: 15vw;
+  width: 35vw;
+  height: 16vw;
   margin-top: 2vw;
   border-radius: 5px;
-  padding: 2vw 2.5vw;
+  padding: 2vw 3vw;
   position: relative;
 }
 
@@ -18,9 +20,10 @@
 }
 
 #task-card p {
+  font-size: 1.2vw;
   color: #101010bf;
   margin-top: 1.2vw;
-  font-weight: 400;
+  font-weight: 500;
 }
 #task-card img {
   position: absolute;
@@ -30,20 +33,26 @@
 }
 
 #progress-bar {
-  margin-top: 5vw;
+  margin-top: 8vw;
   display: flex;
 }
 
 #progress {
-  width: 20vw;
+  width: 28vw;
   height: 5px;
   border-radius: 20px;
   background-color: rgba(128, 128, 128, 0.508);
 }
 
 #progress-track {
-  width: 75%;
+  display: flex;
+  gap: 20vw;
   height: 5px;
   border-radius: 20px;
   background-color: #fff;
+}
+#progress-track h5 {
+  font-size: 1vw;
+  color: #000;
+  margin-top: -1.8vw;
 }

@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 // Seperate error message
 const ErrorMessage = ({ message }) => <h5 id="account-error">{message}</h5>;
@@ -91,19 +92,27 @@ const LoginForm = () => {
   const handleAuthAction = async (data, action) => {
     console.log(action, "actionsss");
     setIsCreating(true);
-    const { email, password, firstName } = data;
+    const { email, password, firstName, secondName } = data;
     console.log(data);
     try {
       const response =
         action === "register"
           ? await createUserWithEmailAndPassword(auth, email, password)
           : await signInWithEmailAndPassword(auth, email, password);
-      console.log(response.user);
-      if (action === "register") {
-        await setDoc(doc(db, "users", user.uid), {
-          displayName: firstName,
-        });
-      }
+      // console.log(response.user);
+      console.log(response.user.uid, "uid in response");
+      // if (action === "register") {
+      // console.log(response.user.uid,"uid in response");
+      // await setDoc(doc(db, "users", response.user.uid), {
+      //   displayName: firstName,
+      // });
+      await setDoc(doc(db, "users", response.user.uid), {
+        firstName: firstName,
+        lastName: secondName,
+      });
+
+      console.log(response.user.uid, "uid in response");
+      // }
 
       setSuccess(
         action === "register"

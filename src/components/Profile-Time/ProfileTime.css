@@ -1,0 +1,143 @@
+#profile-time {
+  margin-top: 2.5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5vw;
+}
+
+#profile {
+  display: flex;
+  gap: 15vw;
+  align-items: center;
+}
+
+#notif {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#notif img {
+  width: 1.4vw;
+  cursor: pointer;
+}
+
+#profileDescription {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#profileDescription img {
+  width: 3vw;
+}
+
+#name-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#name-desc h4 {
+  color: #fff;
+  font-size: 0.9vw;
+}
+#name-desc h5 {
+  color: #acaaaa;
+  font-weight: 400;
+}
+
+#project_timer {
+  margin-top: 1.2vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 30vw;
+  height: 9vw;
+  font-size: 1vw;
+  padding: 2.2vw 1.5vw;
+  background-color: #151515;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  color: #686868;
+}
+
+#project {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+#project h3 {
+  font-size: 1.3vw;
+  color: #fff;
+}
+#project h4 {
+  font-size: 1.2vw;
+}
+
+#project_timer img {
+  width: 3.5vw;
+  cursor: pointer;
+}
+
+#calendar {
+  display: flex;
+  align-items: center;
+  gap: 15vw;
+}
+
+#date {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#date h4 {
+  color: #686868;
+  font-weight: 500;
+}
+
+#date h2 {
+  font-size: 1.8vw;
+}
+
+#add-task {
+  margin-left: -4vw;
+  cursor: pointer;
+  padding: 1.2vw 2.5vw;
+  font-weight: 600;
+  font-size: 1.1vw;
+  border-radius: 5px;
+  border: none;
+  background-color: #dfec8a;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 0.4vw;
+}
+
+#add-task svg{
+    font-size: 1.5vw;
+}
+
+.react-calendar {
+  width: 350px;
+  max-width: 100%;
+  background-color: transparent;
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
+}
+
+.react-calendar__navigation {
+  display: none;
+}
+.react-calendar__month-view__weekdays__weekday {
+  padding: 2.5em;
+}
+
+abbr[title] {
+  text-decoration: none;
+}
