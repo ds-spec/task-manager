@@ -1,21 +1,23 @@
 #task-list {
+  display: flex;
+  gap: 12px;
+  width: 100%;
   margin-top: -35px;
-  overflow-y: auto;
-  height: 45vh;
-  width: 37vw;
+  overflow-x: hidden;
 }
 #task-card {
-  width: 35vw;
-  height: 16vw;
+  width: 16.5vw;
+  height: 26vh;
+  cursor: pointer;
   margin-top: 2vw;
-  border-radius: 5px;
-  padding: 2vw 3vw;
+  border-radius: 20px;
+  padding: 1vw 1vw;
   position: relative;
 }
 
 #task-card h3 {
-  color: #000;
-  font-weight: 900;
+  color: #fff;
+  font-weight: 400;
   font-size: 1.5vw;
 }
 
@@ -25,34 +27,46 @@
   margin-top: 1.2vw;
   font-weight: 500;
 }
-#task-card img {
+/* #task-card img {
   position: absolute;
   top: 2vw;
   right: 2vw;
   cursor: pointer;
-}
+} */
 
-#progress-bar {
-  margin-top: 8vw;
+#shared-users {
   display: flex;
+  align-items: center;
+  margin-top: 1vw;
+  margin-left: 0.8vw;
 }
 
-#progress {
-  width: 28vw;
-  height: 5px;
-  border-radius: 20px;
-  background-color: rgba(128, 128, 128, 0.508);
+#shared-users img {
+  width: 3vw;
+  margin-left: -14px;
+  border: 2px solid #6066ad;
+  padding: 0.15vw;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
 }
 
-#progress-track {
+#track-time {
+  margin-top: 2.3vw;
   display: flex;
-  gap: 20vw;
-  height: 5px;
-  border-radius: 20px;
-  background-color: #fff;
+  justify-content: space-between;
+  align-items: center;
 }
-#progress-track h5 {
-  font-size: 1vw;
-  color: #000;
-  margin-top: -1.8vw;
+
+#track-time h4 {
+  color: #636363;
+  font-size: 1.2vw;
+}
+#track-time h4 span {
+  color: #fff;
+  margin-left: 0.2vw;
+}
+
+#track-time svg {
+  color: #fff;
+  font-size: 1.4vw;
 }

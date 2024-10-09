@@ -51,3 +51,26 @@ pnpm-lock.yaml
 # Test coverage
 coverage/
 .nyc_output/
+
+
+# Vite configuration files
+vite.config.js
+vite.config.ts
+vite.config.mjs
+
+# ESLint and related linter configuration files
+.eslintcache
+.eslintrc.js
+.eslintrc.cjs
+.eslintrc.json
+.eslintrc.yaml
+.eslintrc.yml
+
+# Prettier configuration
+.prettierrc
+.prettierrc.js
+.prettierrc.json
+.prettierrc.yml
+.prettierrc.yaml
+.prettierrc.toml
+.prettierignore

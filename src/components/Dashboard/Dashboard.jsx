@@ -1,68 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import assets from "../../assets/assets";
-import Tasks from "../Tasks-Details/Tasks";
-import ProfileTime from "../Profile-Time/ProfileTime";
+import { LiaTasksSolid } from "react-icons/lia";
+import { IoCalendarClearOutline } from "react-icons/io5";
+import { RiNotification2Line } from "react-icons/ri";
+import { PiTimerBold } from "react-icons/pi";
+import { RiSettingsLine } from "react-icons/ri";
+import { IoMenu } from "react-icons/io5";
+import { IoMdAdd } from "react-icons/io";
+import { FaCalendar } from "react-icons/fa";
+import MainTop from "../Main/Main";
 
 const Dashboard = () => {
   const [activeTask, setActiveTask] = useState(0);
+  const [time, setTime] = useState(new Date());
 
   const handleTaskClick = (index) => {
     setActiveTask(index);
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTime(new Date());
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const formatTime = (date) => {
+    return date.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+  };
+
   return (
     <div id="main">
-      <div id="nav-box">
-        <h1>Life Tracker</h1>
-        <div id="task-actions">
-          <div
-            className={`tasks ${activeTask === 0 ? "active" : ""}`}
-            onClick={() => handleTaskClick(0)}
-          >
-            <img src={assets.tasks} />
-
-            <h5>Simple Tasks</h5>
-          </div>
-
-          <div
-            className={`tasks ${activeTask === 1 ? "active" : ""}`}
-            onClick={() => handleTaskClick(1)}
-          >
-            <img src={assets.calendar} />
-
-            <h5>Smart Calendar</h5>
-          </div>
-
-          <div
-            className={`tasks ${activeTask === 2 ? "active" : ""}`}
-            onClick={() => handleTaskClick(2)}
-          >
-            <img src={assets.schedule} />
-
-            <h5>Schedule</h5>
-          </div>
-
-          <div
-            className={`tasks ${activeTask === 3 ? "active" : ""}`}
-            onClick={() => handleTaskClick(3)}
-          >
-            <img src={assets.timer} />
-
-            <h5>Pomodoro</h5>
-          </div>
-          <div
-            className={`tasks ${activeTask === 4 ? "active" : ""}`}
-            onClick={() => handleTaskClick(4)}
-          >
-            <img src={assets.settings} />
-
-            <h5>Settings</h5>
-          </div>
+      <div id="nav-left">
+        <div id="nav-top">
+          <h5>{formatTime(time)}</h5>
+          <IoMenu />
+          <IoMdAdd />
         </div>
+        <div id="nav-bottom">
+          <LiaTasksSolid />
+          <IoCalendarClearOutline />
+          <RiNotification2Line />
+          <PiTimerBold />
+          <RiSettingsLine />
+        </div>
+        <div id="line"></div>
       </div>
-      <Tasks />
-      <ProfileTime />
+      <MainTop />
     </div>
   );
 };
