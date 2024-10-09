@@ -16,7 +16,9 @@ import { db } from "../../firebase";
 const TaskCard = () => {
   const [taskCards, setTaskCards] = useState([]);
   const { currentUser } = useAuth();
-  const [activeCard, setActiveCard] = useState(false);
+  const [activeCard, setActiveCard] = useState(0);
+
+  console.log(activeCard);
 
   // useEffect(() => {
   //   if (!currentUser.uid) return;
@@ -51,16 +53,48 @@ const TaskCard = () => {
     {
       taskName: "Analysis",
     },
+    // {
+    //   taskName: "Analysis",
+    // },
+    // {
+    //   taskName: "Analysis",
+    // },
+    // {
+    //   taskName: "Analysis",
+    // },
+    // {
+    //   taskName: "Analysis",
+    // },
+    // {
+    //   taskName: "Analysis",
+    // },
+    // {
+    //   taskName: "Analysis",
+    // },
+    // {
+    //   taskName: "Analysis",
+    // },
+    // {
+    //   taskName: "Analysis",
+    // },
+    // {
+    //   taskName: "Analysis",
+    // },
+    // {
+    //   taskName: "Analysis",
+    // },
+    // {
+    //   taskName: "Analysis",
+    // },
   ];
 
   return (
     <div id="task-list">
       {tasks?.map((task, index) => (
         <div
-          id="task-card"
-          onClick={() => setActiveCard(true)}
+          className={`task-card ${activeCard === index ? "active" : ""}`}
+          onClick={() => setActiveCard(index)}
           key={index}
-          style={{ backgroundColor: "#000" }}
         >
           <h3 id="taskName">{task?.taskName}</h3>
           <div id="shared-users">
@@ -69,12 +103,15 @@ const TaskCard = () => {
             <img src={assets.user3} alt="" />
             <img src={assets.user4} alt="" />
           </div>
-          <div id="track-time">
+          <div className={`track-time ${activeCard === index ? "active" : ""}`}>
             <h4>
               Tracked <span>5h 25m</span>
             </h4>
             <FiArrowUpRight />
           </div>
+          <div
+            className={`task-line ${activeCard === index ? "active" : ""}`}
+          ></div>
         </div>
       ))}
     </div>
