@@ -54,73 +54,26 @@ const TasksForm = ({ setAddTask }) => {
   };
   return (
     <div id="taskFunctionality">
-      <form onSubmit={handleSubmit(createTask)}>
-        <input
-          type="text"
-          placeholder="Task name"
-          {...register("taskname")}
-          id="taskHead"
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          {...register("taskdescription")}
-          id="description"
-        />
-        <div id="color-palette">
-          <div
-            tabindex="0"
-            id="color-orange"
-            onClick={() => setBackgroundColor("#f5390f")}
-          ></div>
-          <div
-            tabindex="0"
-            id="color-red"
-            onClick={() => setBackgroundColor("red")}
-          ></div>
-          <div
-            tabindex="0"
-            id="color-purple"
-            onClick={() => setBackgroundColor("rgb(206, 19, 206)")}
-          ></div>
-          <div
-            tabindex="0"
-            id="color-blue"
-            onClick={() => setBackgroundColor("#a4b4ff")}
-          ></div>
-          <div
-            tabindex="0"
-            id="color-green"
-            onClick={() => setBackgroundColor("green")}
-          ></div>
-        </div>
-        <div id="priority-div">
-          <button onClick={(e) => preventReload(e)} id="priority-btn">
-            <IoFlagOutline />
-            Priority
+      <div id="form-task">
+        <h1>New task</h1>
+        <form onSubmit={handleSubmit(createTask)}>
+          <input
+            type="text"
+            placeholder="Task name"
+            {...register("taskname")}
+            id="taskHead"
+          />
+          <input
+            type="text"
+            placeholder="Description"
+            {...register("taskdescription")}
+            id="description"
+          />
+          <button type="submit" id="create-task">
+            Create task
           </button>
-          {priorityShow && (
-            <div id="downbar">
-              <div id="very-high">
-                <FaFlag />
-                Very High
-              </div>
-              <div id="high">
-                <FaFlag />
-                High
-              </div>
-              <div id="low">
-                <FaFlag />
-                Low
-              </div>
-            </div>
-          )}
-        </div>
-        <hr />
-        <button type="submit" id="create-task">
-          Create task
-        </button>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

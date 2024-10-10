@@ -1,0 +1,67 @@
+#task-ui {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: #d0d1e0;
+}
+
+#create-div {
+  display: flex;
+  gap: 5.8vw;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 7vw;
+}
+
+#create-div h1 {
+  color: #010a16;
+  font-size: 3.2vw;
+  font-weight: 300;
+}
+
+#add-new {
+  display: flex;
+  gap: 2.8vw;
+}
+
+.new-task-card,
+.new-project-card {
+  background-image: url(/public/gradient.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 15px;
+  width: 24vw;
+  height: 26vh;
+  position: relative;
+}
+
+.new-project-card {
+  background-image: url(/public/project-gradient.png);
+}
+
+.new-task-card,
+.new-project-card h4 {
+  padding: 1.2vw;
+  font-weight: 400;
+  font-size: 1.5vw;
+}
+
+.new-task-card svg {
+  position: absolute;
+  right: 1vw;
+  bottom: 1vw;
+  font-size: 2.4vw;
+  cursor: pointer;
+}
+.new-project-card svg{
+    position: absolute;
+    right: 1vw;
+    bottom: 1vw;
+    font-size: 2.4vw;
+    cursor: pointer;
+
+}

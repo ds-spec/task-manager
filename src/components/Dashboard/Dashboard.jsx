@@ -10,14 +10,12 @@ import { IoMenu } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
 import { FaCalendar } from "react-icons/fa";
 import MainTop from "../Main/Main";
+import TasksForm from "../Task-Form/TasksForm";
+import TaskUI from "../Task-UI/TaskUI";
 
 const Dashboard = () => {
-  const [activeTask, setActiveTask] = useState(0);
+  const [activeButton, setActiveButton] = useState(false);
   const [time, setTime] = useState(new Date());
-
-  const handleTaskClick = (index) => {
-    setActiveTask(index);
-  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -40,8 +38,13 @@ const Dashboard = () => {
       <div id="nav-left">
         <div id="nav-top">
           <h5>{formatTime(time)}</h5>
-          <IoMenu />
-          <IoMdAdd />
+          <IoMenu
+          // className={`svg ${activeButton ? "svg-active" : ""}`}
+          />
+          <IoMdAdd
+            onClick={() => setActiveButton(true)}
+            // className={`svg ${activeButton ? "svg-active" : ""}`}
+          />
         </div>
         <div id="nav-bottom">
           <LiaTasksSolid />
@@ -53,6 +56,7 @@ const Dashboard = () => {
         <div id="line"></div>
       </div>
       <MainTop />
+      {activeButton && <TaskUI />}
     </div>
   );
 };

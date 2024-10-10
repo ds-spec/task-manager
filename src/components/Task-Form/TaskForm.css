@@ -1,23 +1,37 @@
 #taskFunctionality {
   position: fixed;
-  top: 35%;
-  left: 30%;
-  width: 35vw;
-  height: 12vw;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
-  background-color: #f5f1f1;
-  box-shadow: 1px 10px 35px #6d5b5b;
+  background-color: #d4d2e3;
+}
+#form-task {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 11.5vw;
+  gap: 2vw;
 }
 
-#taskFunctionality form {
-  margin-top: 1vw;
+#form-task h1 {
+  font-weight: 400;
+  font-size: 2.8vw;
+  color: #000;
+}
+
+#form-task form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.8vw;
 }
 
 #taskHead {
   padding: 0.4vw 1vw;
   border: none;
   outline: none;
-  background-color: #f5f1f1;
+  background-color: #c6c3df;
   font-weight: 800;
   font-size: 1.5vw;
 }
