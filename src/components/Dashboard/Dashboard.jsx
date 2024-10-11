@@ -10,7 +10,7 @@ import { IoMenu } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
 import { FaCalendar } from "react-icons/fa";
 import MainTop from "../Main/Main";
-import TasksForm from "../Task-Form/TasksForm";
+import TasksForm from "../Project-Form/ProjectForm";
 import TaskUI from "../Task-UI/TaskUI";
 
 const Dashboard = () => {
@@ -38,13 +38,8 @@ const Dashboard = () => {
       <div id="nav-left">
         <div id="nav-top">
           <h5>{formatTime(time)}</h5>
-          <IoMenu
-          // className={`svg ${activeButton ? "svg-active" : ""}`}
-          />
-          <IoMdAdd
-            onClick={() => setActiveButton(true)}
-            // className={`svg ${activeButton ? "svg-active" : ""}`}
-          />
+          <IoMenu />
+          <IoMdAdd onClick={() => setActiveButton(true)} />
         </div>
         <div id="nav-bottom">
           <LiaTasksSolid />

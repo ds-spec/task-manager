@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./TaskUI.css";
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
-import TasksForm from "../Task-Form/TasksForm";
+import TasksForm from "../Project-Form/ProjectForm";
 
 const TaskUI = () => {
   const [cardActive, setCardActive] = useState(false);
@@ -12,11 +12,11 @@ const TaskUI = () => {
         <div id="add-new">
           <div className="new-task-card">
             <h4>New task</h4>
-            <BsFillArrowUpRightCircleFill onClick={() => setCardActive(true)} />
+            <BsFillArrowUpRightCircleFill />
           </div>
           <div className="new-project-card">
             <h4>New project</h4>
-            <BsFillArrowUpRightCircleFill />
+            <BsFillArrowUpRightCircleFill onClick={() => setCardActive(true)} />
           </div>
         </div>
       </div>

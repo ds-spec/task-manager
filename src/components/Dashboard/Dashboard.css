@@ -26,6 +26,11 @@
   cursor: pointer;
 }
 
+#nav-top svg:hover {
+  background-color: #ffd9e6;
+  border-radius: 8px;
+}
+
 #nav-top h5 {
   font-size: 1.1vw;
   margin-left: -0.4vw;
