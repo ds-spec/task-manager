@@ -11,14 +11,21 @@ import MembersList from "../Members-List/MembersList";
 const ProjectForm = ({ setAddTask }) => {
   const { currentUser } = useAuth();
   const [disabled, setDisabled] = useState(false);
+  console.log(disabled, "disabledstatee");
   const [list, setList] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      projectName: "",
+    },
+  });
   const projectName = watch("projectName");
+  console.log(projectName, "projectNamedd");
+
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -40,12 +47,14 @@ const ProjectForm = ({ setAddTask }) => {
   };
 
   useEffect(() => {
-    if (projectName === "") {
+    const isProjectName = projectName?.trim();
+    if (isProjectName === "") {
       setDisabled(true);
     } else {
       setDisabled(false);
     }
   }, [projectName]);
+
   console.log(projectName, "flkfnef");
   const createProject = (data) => {
     handleCreateProject(data);
@@ -101,7 +110,7 @@ const ProjectForm = ({ setAddTask }) => {
             </button>
           </form>
         )}
-        {list && <MembersList />}
+        {list && <MembersList projectName={projectName} />}
       </div>
     </div>
   );
