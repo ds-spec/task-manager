@@ -8,7 +8,7 @@ import { useAuth } from "../../AuthProvider";
 import { db } from "../../firebase";
 import MembersList from "../Members-List/MembersList";
 
-const ProjectForm = ({ setAddTask }) => {
+const ProjectForm = ({ setAddTask, setActiveButton }) => {
   const { currentUser } = useAuth();
   const [disabled, setDisabled] = useState(false);
   console.log(disabled, "disabledstatee");
@@ -32,19 +32,19 @@ const ProjectForm = ({ setAddTask }) => {
     setIsChecked(!isChecked);
   };
 
-  const handleCreateProject = async (data) => {
-    try {
-      await addDoc(collection(db, "tasks"), {
-        projectName: data?.projectName,
-        // taskDescription: data?.taskdescription,
-        userId: currentUser?.uid,
-        backgroundColor: backgroundColor,
-        taskCompleted: "20%",
-      });
-    } catch (error) {
-      console.log("Error creating task: ", error.message);
-    }
-  };
+  // const handleCreateProject = async (data) => {
+  //   try {
+  //     await addDoc(collection(db, "tasks"), {
+  //       projectName: data?.projectName,
+  //       // taskDescription: data?.taskdescription,
+  //       userId: currentUser?.uid,
+  //       backgroundColor: backgroundColor,
+  //       taskCompleted: "20%",
+  //     });
+  //   } catch (error) {
+  //     console.log("Error creating task: ", error.message);
+  //   }
+  // };
 
   useEffect(() => {
     const isProjectName = projectName?.trim();
@@ -57,13 +57,13 @@ const ProjectForm = ({ setAddTask }) => {
 
   console.log(projectName, "flkfnef");
   const createProject = (data) => {
-    handleCreateProject(data);
+    // handleCreateProject(data);
     setAddTask(false);
   };
   return (
     <div id="taskFunctionality">
       <div id="form-task">
-        <h1>New project</h1>
+        {list ? <h1>{projectName}</h1> : <h1>New project</h1>}
         {!list && (
           <form onSubmit={handleSubmit(createProject)}>
             <input
@@ -110,7 +110,12 @@ const ProjectForm = ({ setAddTask }) => {
             </button>
           </form>
         )}
-        {list && <MembersList projectName={projectName} />}
+        {list && (
+          <MembersList
+            projectName={projectName}
+            setActiveButton={setActiveButton}
+          />
+        )}
       </div>
     </div>
   );

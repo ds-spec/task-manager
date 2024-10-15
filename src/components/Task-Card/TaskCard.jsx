@@ -12,96 +12,29 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { db } from "../../firebase";
+import { useSelector } from "react-redux";
 
 const TaskCard = () => {
   const [taskCards, setTaskCards] = useState([]);
   const { currentUser } = useAuth();
   const [activeCard, setActiveCard] = useState(0);
 
-  console.log(activeCard);
-
-  // useEffect(() => {
-  //   if (!currentUser.uid) return;
-  //   // const fetchTaskCards = async () => {
-  //   const q = query(
-  //     collection(db, "tasks"),
-  //     where("userId", "==", currentUser?.uid)
-  //   );
-  //   const unsubscribe = onSnapshot(q, (snapshot) => {
-  //     const fetchedTasks = snapshot.docs.map((doc) => ({
-  //       ...doc.data(),
-  //     }));
-  //     console.log(fetchedTasks, "fetchedTasks");
-  //     setTaskCards(fetchedTasks);
-  //   });
-  //   return () => unsubscribe();
-  // }, [currentUser?.uid]);
-
-  console.log(currentUser);
-  console.log(taskCards);
-
-  const tasks = [
-    {
-      taskName: "Planning",
-    },
-    {
-      taskName: "Design",
-    },
-    {
-      taskName: "Content Creation",
-    },
-    {
-      taskName: "Analysis",
-    },
-    // {
-    //   taskName: "Analysis",
-    // },
-    // {
-    //   taskName: "Analysis",
-    // },
-    // {
-    //   taskName: "Analysis",
-    // },
-    // {
-    //   taskName: "Analysis",
-    // },
-    // {
-    //   taskName: "Analysis",
-    // },
-    // {
-    //   taskName: "Analysis",
-    // },
-    // {
-    //   taskName: "Analysis",
-    // },
-    // {
-    //   taskName: "Analysis",
-    // },
-    // {
-    //   taskName: "Analysis",
-    // },
-    // {
-    //   taskName: "Analysis",
-    // },
-    // {
-    //   taskName: "Analysis",
-    // },
-  ];
+  const projectCard = useSelector((state) => state.taskDetails.tasks);
+  console.log(projectCard, "projectCardprojectCard");
 
   return (
     <div id="task-list">
-      {tasks?.map((task, index) => (
+      {projectCard?.map((project, index) => (
         <div
           className={`task-card ${activeCard === index ? "active" : ""}`}
           onClick={() => setActiveCard(index)}
           key={index}
         >
-          <h3 id="taskName">{task?.taskName}</h3>
+          <h3 id="taskName">{project?.projectName}</h3>
           <div id="shared-users">
-            <img src={assets.user1} alt="" />
-            <img src={assets.user2} alt="" />
-            <img src={assets.user3} alt="" />
-            <img src={assets.user4} alt="" />
+            {project?.membersProfile.map((member) => (
+              <img src={member} alt="" />
+            ))}
           </div>
           <div className={`track-time ${activeCard === index ? "active" : ""}`}>
             <h4>

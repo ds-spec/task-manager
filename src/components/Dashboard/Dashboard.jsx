@@ -51,7 +51,7 @@ const Dashboard = () => {
         <div id="line"></div>
       </div>
       <MainTop />
-      {activeButton && <TaskUI />}
+      {activeButton && <TaskUI setActiveButton={setActiveButton}/>}
     </div>
   );
 };

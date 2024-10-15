@@ -38,10 +38,9 @@
 
 #workboard-bar {
   display: flex;
-  /* justify-content: space-between; */
   gap: 45vw;
   align-items: center;
-  margin-top: 2.8vw;
+  margin-top: 1.8vw;
 }
 
 #workboard-bar h1 {
