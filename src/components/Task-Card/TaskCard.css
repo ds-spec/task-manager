@@ -2,7 +2,6 @@
   display: flex;
   gap: 12px;
   width: calc(100vw - 94px);
-  margin-top: -35px;
   overflow-x: auto;
   white-space: nowrap;
 }

@@ -4,8 +4,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
-  /* background-color: #d0d1e0; */
   background-color: #d3d8e9;
 }
 
@@ -32,7 +30,9 @@
 }
 
 .new-task-card,
-.new-project-card {
+.new-project-card,
+.new-status-card,
+.new-member-card {
   background-image: url(/gradient.jpg);
   background-repeat: no-repeat;
   background-position: center;
@@ -47,8 +47,18 @@
   background-image: url(/project-gradient.png);
 }
 
+.new-status-card {
+  background-image: url(/status-gradient.png);
+}
+
+.new-member-card {
+  background-image: url(/member-gradient.png);
+}
+
 .new-task-card,
-.new-project-card h4 {
+.new-project-card,
+.new-status-card,
+.new-member-card h4 {
   padding: 1.2vw;
   font-weight: 400;
   font-size: 1.5vw;
@@ -62,6 +72,21 @@
   cursor: pointer;
 }
 .new-project-card svg {
+  position: absolute;
+  right: 1vw;
+  bottom: 1vw;
+  font-size: 2.4vw;
+  cursor: pointer;
+}
+.new-status-card svg {
+  position: absolute;
+  right: 1vw;
+  bottom: 1vw;
+  font-size: 2.4vw;
+  cursor: pointer;
+}
+
+.new-member-card svg {
   position: absolute;
   right: 1vw;
   bottom: 1vw;

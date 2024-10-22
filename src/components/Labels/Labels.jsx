@@ -25,7 +25,7 @@ const Labels = ({ selectedMember, projectName, setActiveButton }) => {
     }
   };
 
-  const labelCard = [
+  const labelCards = [
     {
       labelName: "Planned",
       backgroundColor: "#B7B6DF",
@@ -53,12 +53,12 @@ const Labels = ({ selectedMember, projectName, setActiveButton }) => {
         {selectedMember?.map((task) => (
           <img
             className="w-9 rounded-full aspect-square border-2 p-0.5 border-[#797ACD]"
-            src={task}
+            src={task.profilePicture}
           />
         ))}
       </div>
       <div className="flex flex-col flex-wrap gap-x-12 gap-y-8 h-72">
-        {labelCard?.map((label) => (
+        {labelCards?.map((label) => (
           <div
             className={`bg-[${label.backgroundColor}] w-72 h-[4.8vw] rounded-2xl text-left px-4 py-4 text-[#282748]
             text-xl font-normal flex items-center gap-2`}

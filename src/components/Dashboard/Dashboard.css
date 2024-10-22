@@ -17,19 +17,20 @@
 #nav-top {
   display: flex;
   flex-direction: column;
-  gap: 3.5vw;
+  gap: 1.6vw;
   color: #000;
 }
 
 #nav-top svg {
   font-size: 1.5vw;
   cursor: pointer;
+  color: #000;
 }
 
-#nav-top svg:hover {
+/* #nav-top svg:hover {
   background-color: #ffd9e6;
   border-radius: 8px;
-}
+} */
 
 #nav-top h5 {
   font-size: 1.1vw;
@@ -41,7 +42,7 @@
   margin-top: 6vw;
   display: flex;
   flex-direction: column;
-  gap: 2.8vw;
+  gap: 1.5vw;
 }
 
 #nav-bottom svg {
@@ -53,7 +54,7 @@
   position: absolute;
   left: 4.2%;
   top: 0;
-  height: 100%;
+  height: 100vh;
   width: 2px;
   background-color: #e2e5ff;
 }

@@ -6,6 +6,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import assets from "../../assets/assets";
 import Tasks from "../Tasks-Details/Tasks";
 import TaskCard from "../Task-Card/TaskCard";
+import MainBottom from "../MainBottom/MainBottom";
 
 const MainTop = () => {
   return (
@@ -29,11 +30,11 @@ const MainTop = () => {
         </div>
         <div id="main-line"></div>
       </div>
-      <div id="main-center">
+      <div id="main-center" className="min-h-80">
         <TaskCard />
       </div>
       <div id="main-bottom">
-        <p>Main Bottom</p>
+        <MainBottom />
       </div>
     </div>
   );

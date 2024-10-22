@@ -1,6 +1,7 @@
 #main-head {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  /* grid-template-rows: 1fr 1fr 1fr; */
+  grid-template-rows: auto 1fr auto;
   color: #000;
   padding: 1.2vw 1vw;
 }
