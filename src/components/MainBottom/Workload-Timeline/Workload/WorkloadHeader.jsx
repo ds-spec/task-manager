@@ -1,5 +1,5 @@
 import React from "react";
-import assets from "../../../assets/assets";
+import assets from "../../../../assets/assets";
 
 const WorkloadHeader = () => {
   const teams = [
@@ -166,24 +166,23 @@ const WorkloadHeader = () => {
       isChecked: false,
     },
   ];
+
+  const displayedTeams = teams.slice(0, 3);
   return (
-    <div>
-      <h2>Workload</h2>
-      {teams?.map((team) =>
-        team?.length > 4 ? (
+    <div className="flex items-center w-full justify-evenly mt-1">
+      <h2 className="text-lg font-bold text-[#6b6868]">JAN 16-23</h2>
+      <div className="flex ">
+        {displayedTeams?.map((team) => (
           <img
-            className="w-8 rounded-full inline-block"
+            className="w-8 rounded-full opacity-80 -ml-4 aspect-square"
             src={team.profilePicture}
             alt=""
           />
-        ) : (
-          <img
-            className="w-8 rounded-full inline-block"
-            src={team.profilePicture}
-            alt=""
-          />
-        )
-      )}
+        ))}
+        <div className="border-2 border-gray-400 p-0.5 rounded-full opacity-80  aspect-square text-[#6b6868] font-bold flex items-center justify-center">
+          +{teams?.length}
+        </div>
+      </div>
     </div>
   );
 };

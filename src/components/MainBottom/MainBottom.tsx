@@ -4,9 +4,10 @@ import { CgWorkAlt } from "react-icons/cg";
 import { RiTimeLine } from "react-icons/ri";
 import { MdFormatListBulleted } from "react-icons/md";
 import TimelineView from "./Workload-Timeline/Workload-Timeline";
+import StatusBottomView from "./StatusBottomView/StatusBottomView";
 
 const MainBottom = () => {
-  const StatusView = () => <div>Status content</div>;
+  const StatusView = () => <StatusBottomView />;
   const WorkView = () => <div>Work content</div>;
   const MembersTimeline = () => <TimelineView />;
   const ListView = () => <div>List content</div>;
@@ -32,7 +33,9 @@ const MainBottom = () => {
     <div id="main-bottom">
       <div id="main-nav" className="flex gap-10">
         <h3
-          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer font-medium hover:bg-[#FFD9E6] px-6 py-2 rounded-full`}
+          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer hover:bg-[#FFD9E6] font-medium ${
+            activeState === "Status" ? "bg-[#FFD9E6]" : ""
+          } px-6 py-2 rounded-full`}
           onClick={() => setActiveState("Status")}
         >
           <VscLayoutStatusbar />
@@ -40,21 +43,27 @@ const MainBottom = () => {
         </h3>
 
         <h3
-          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer font-medium hover:bg-[#FFD9E6] px-6 py-2 rounded-full`}
+          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer hover:bg-[#FFD9E6] font-medium ${
+            activeState === "Work" ? "bg-[#FFD9E6]" : ""
+          } px-6 py-2 rounded-full`}
           onClick={() => setActiveState("Work")}
         >
           <CgWorkAlt />
           Workload
         </h3>
         <h3
-          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer font-medium hover:bg-[#FFD9E6] px-6 py-2 rounded-full`}
+          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer hover:bg-[#FFD9E6] font-medium ${
+            activeState === "Timeline" ? "bg-[#FFD9E6]" : ""
+          } px-6 py-2 rounded-full`}
           onClick={() => setActiveState("Timeline")}
         >
           <RiTimeLine />
           Timeline
         </h3>
         <h3
-          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer font-medium hover:bg-[#FFD9E6] px-6 py-2 rounded-full`}
+          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer hover:bg-[#FFD9E6] font-medium ${
+            activeState === "List" ? "bg-[#FFD9E6]" : ""
+          } px-6 py-2 rounded-full`}
           onClick={() => setActiveState("List")}
         >
           <MdFormatListBulleted />

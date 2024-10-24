@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import assets from "../../../assets/assets";
+import assets from "../../../../assets/assets";
 import WorkloadHeader from "./WorkloadHeader";
 const MembersWorkload = () => {
   //   const membersWorkload = useSelector((state) => state.taskDetails.tasks);
@@ -169,13 +169,13 @@ const MembersWorkload = () => {
     },
   ];
   return (
-    <div className="mt-6">
+    <div className="mt-0">
       <div>
         <WorkloadHeader />
       </div>
       {membersWorkload?.map((members, index) => (
         <>
-          <div key={index} className="px-6 py-5">
+          <div key={index} className="px-6 py-2">
             <div id="profile-name" className="flex items-center gap-2">
               <img
                 className="w-10 aspect-square rounded-full border-2 border-gray-400 p-0.5"
