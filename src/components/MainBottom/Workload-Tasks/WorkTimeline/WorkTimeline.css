@@ -1,0 +1,118 @@
+/* .rbc-time-content {
+  display: none;
+}
+
+.rbc-toolbar {
+  display: none;
+}
+
+.rbc-label,
+.rbc-time-header-gutter {
+  padding: 0px;
+}
+
+.rbc-row-content {
+  height: 35.8vh;
+}
+
+.rbc-row,
+.rbc-time-header-cell {
+  min-height: 32.7px;
+}
+
+.rbc-row-segment {
+  min-height: 104.8px;
+  border-bottom: 0.2vh solid #dbd3d3;
+}
+
+.rbc-today {
+  background-color: #ece9ec;
+}
+
+.rbc-allday-cell {
+  overflow-y: auto;
+}
+
+.rbc-header .rbc-today {
+  border-bottom: none;
+}
+
+.rbc-row,
+.rbc-time-header-cell {
+  border-bottom: 0.2vh solid #dbd3d3;
+}
+
+.rbc-row-content {
+  border-bottom: 0.2vh solid #dbd3d3;
+} */
+
+.custom-calendar .rbc-time-content {
+  display: none !important; /* Hides the time slots */
+}
+
+.custom-calendar .rbc-toolbar {
+  display: none !important; /* Hides the toolbar */
+}
+
+.custom-calendar .rbc-label,
+.custom-calendar .rbc-time-header-gutter {
+  padding: 0 !important;
+}
+
+.custom-calendar .rbc-row-content {
+  height: 35.5vh !important; /* Adjusts the row content height */
+  overflow-y: scroll;
+}
+
+.rbc-header {
+  padding: 5px 3px !important;
+}
+
+.rbc-row-segment {
+  padding: 63px 1px 1px 1px !important;
+}
+
+.rbc-event-continues-prior {
+  border-radius: 25px;
+  padding: 5px 15px;
+  color: #000;
+}
+
+.custom-calendar .rbc-row,
+.custom-calendar .rbc-time-header-cell {
+  min-height: 32.7px !important; /* Sets minimum height for rows */
+}
+
+.custom-calendar .rbc-row-segment {
+  min-height: 104.8px !important;
+  border-bottom: 0.2vh solid #dbd3d3 !important; /* Adds border */
+}
+
+.custom-calendar .rbc-today {
+  background-color: #e7e2e1 !important; /* Highlights today's date */
+}
+
+.rbc-row-bg,
+.rbc-time-header-content {
+  background-color: #e7e2e1 !important; /* Highlights today's date */
+}
+
+.custom-calendar .rbc-allday-cell {
+  overflow-y: auto !important; /* Adds scrollable content */
+}
+
+.custom-calendar .rbc-header .rbc-today {
+  border-bottom: none !important; /* Removes bottom border from today's header */
+}
+
+.custom-calendar .rbc-row,
+.custom-calendar .rbc-time-header-cell {
+  border-bottom: 0.2vh solid #dbd3d3 !important; /* Adds border to rows */
+}
+
+.custom-calendar .rbc-row-content {
+  border-bottom: 0.2vh solid #dbd3d3 !important; /* Adds bottom border to row content */
+}
+
+/* .rbc-time-view {
+} */

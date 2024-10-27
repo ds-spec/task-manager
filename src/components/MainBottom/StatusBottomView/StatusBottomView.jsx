@@ -39,9 +39,12 @@ const StatusBottomView = () => {
               <HiDotsHorizontal className="text-3xl" />
             </div>
             <div
-              className={`bg-[${card.cardBodyColor}] h-96 rounded-b-xl flex justify-center px-4 py-4`}
+              className={`bg-[${card.cardBodyColor}] h-auto rounded-b-xl flex items-end flex-col justify-center px-4 py-4`}
             >
               <CardView />
+              <h2 className="text-md font-normal text-[#a6a6a9]">
+                Total:<span className="text-[#6870BD] font-extrabold"> 18</span>
+              </h2>
             </div>
           </div>
         </>

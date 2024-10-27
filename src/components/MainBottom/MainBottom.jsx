@@ -5,10 +5,11 @@ import { RiTimeLine } from "react-icons/ri";
 import { MdFormatListBulleted } from "react-icons/md";
 import TimelineView from "./Workload-Timeline/Workload-Timeline";
 import StatusBottomView from "./StatusBottomView/StatusBottomView";
+import TasksView from "./Workload-Tasks/Workload-Tasks";
 
 const MainBottom = () => {
   const StatusView = () => <StatusBottomView />;
-  const WorkView = () => <div>Work content</div>;
+  const WorkView = () => <TasksView />;
   const MembersTimeline = () => <TimelineView />;
   const ListView = () => <div>List content</div>;
 
@@ -31,7 +32,7 @@ const MainBottom = () => {
 
   return (
     <div id="main-bottom">
-      <div id="main-nav" className="flex gap-10">
+      <div id="main-nav" className="flex gap-5">
         <h3
           className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer hover:bg-[#FFD9E6] font-medium ${
             activeState === "Status" ? "bg-[#FFD9E6]" : ""
