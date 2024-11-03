@@ -6,12 +6,13 @@ import { MdFormatListBulleted } from "react-icons/md";
 import TimelineView from "./Workload-Timeline/Workload-Timeline";
 import StatusBottomView from "./StatusBottomView/StatusBottomView";
 import TasksView from "./Workload-Tasks/Workload-Tasks";
+import ListsView from "./ListsView/ListsView";
 
 const MainBottom = () => {
   const StatusView = () => <StatusBottomView />;
   const WorkView = () => <TasksView />;
   const MembersTimeline = () => <TimelineView />;
-  const ListView = () => <div>List content</div>;
+  const ListView = () => <ListsView />;
 
   const [activeState, setActiveState] = useState("Timeline");
 
@@ -34,8 +35,10 @@ const MainBottom = () => {
     <div id="main-bottom">
       <div id="main-nav" className="flex gap-5">
         <h3
-          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer hover:bg-[#FFD9E6] font-medium ${
-            activeState === "Status" ? "bg-[#FFD9E6]" : ""
+          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer hover:bg-[#FFD9E6] ${
+            activeState === "Status"
+              ? "bg-[#FFD9E6] font-bold text-[#282828]"
+              : ""
           } px-6 py-2 rounded-full`}
           onClick={() => setActiveState("Status")}
         >
@@ -44,8 +47,8 @@ const MainBottom = () => {
         </h3>
 
         <h3
-          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer hover:bg-[#FFD9E6] font-medium ${
-            activeState === "Work" ? "bg-[#FFD9E6]" : ""
+          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer hover:bg-[#FFD9E6] ${
+            activeState === "Work" ? "bg-[#FFD9E6] font-bold text-[#282828]" : ""
           } px-6 py-2 rounded-full`}
           onClick={() => setActiveState("Work")}
         >
@@ -53,8 +56,8 @@ const MainBottom = () => {
           Workload
         </h3>
         <h3
-          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer hover:bg-[#FFD9E6] font-medium ${
-            activeState === "Timeline" ? "bg-[#FFD9E6]" : ""
+          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer hover:bg-[#FFD9E6] ${
+            activeState === "Timeline" ? "bg-[#FFD9E6] font-bold text-[#282828]" : ""
           } px-6 py-2 rounded-full`}
           onClick={() => setActiveState("Timeline")}
         >
@@ -62,8 +65,8 @@ const MainBottom = () => {
           Timeline
         </h3>
         <h3
-          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer hover:bg-[#FFD9E6] font-medium ${
-            activeState === "List" ? "bg-[#FFD9E6]" : ""
+          className={`flex items-center gap-2 text-[1.2vw] text-[#939496] cursor-pointer hover:bg-[#FFD9E6] ${
+            activeState === "List" ? "bg-[#FFD9E6] font-bold text-[#282828]" : ""
           } px-6 py-2 rounded-full`}
           onClick={() => setActiveState("List")}
         >

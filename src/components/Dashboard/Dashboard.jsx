@@ -21,7 +21,7 @@ const Dashboard = () => {
     }, 100);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [time]);
 
   const formatTime = (date) => {
     return date.toLocaleTimeString([], {
@@ -50,8 +50,8 @@ const Dashboard = () => {
           <PiTimerBold className="hover:bg-[#D9DDFF] text-black w-10 h-10 p-2 -ml-2 rounded-full cursor-pointer transition-all duration-300" />
           <RiSettingsLine className="hover:bg-[#D9DDFF] text-black w-10 h-10 p-2 -ml-2 rounded-full cursor-pointer transition-all duration-300" />
         </div>
-        <div id="line"></div>
       </div>
+      <div id="line"></div>
       <MainTop />
       {activeButton && <TaskUI setActiveButton={setActiveButton} />}
     </div>

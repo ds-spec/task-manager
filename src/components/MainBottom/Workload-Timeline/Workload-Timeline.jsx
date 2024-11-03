@@ -1,6 +1,7 @@
 import React from "react";
 import { IoIosClose } from "react-icons/io";
 import Workload from "./Workload/Workload";
+import GanttTimelineContainer from "./Workload/GanttTimelineContainer";
 
 const TimelineView = () => {
   return (
@@ -13,7 +14,12 @@ const TimelineView = () => {
           <IoIosClose className="bg-[#EBECEF] rounded-full w-10 h-10 p-2" />
           <h1 className="text-4xl">In Review</h1>
         </div>
-        <div id="timeline-bottom" className="bg-[#ECE9EC] w-full h-72 rounded-b-xl"></div>
+        <div
+          id="timeline-bottom"
+          className="bg-[#ECE9EC] w-full h-72 rounded-b-xl"
+        >
+          {/* <GanttTimelineContainer /> */}
+        </div>
       </div>
       <div id="workload-view" className="w-[20vw]">
         <Workload />

@@ -8,7 +8,7 @@ const TaskCard = () => {
   const [activeCard, setActiveCard] = useState(0);
 
   const projectCard = useSelector((state) => state.taskDetails.tasks);
-  console.log(projectCard, "projectCardprojectCard");
+  // console.log(projectCard, "projectCardprojectCard");
 
   return (
     <div id="task-list">

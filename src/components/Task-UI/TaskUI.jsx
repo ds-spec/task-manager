@@ -3,9 +3,11 @@ import "./TaskUI.css";
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
 import TasksForm from "../Project-Form/ProjectForm";
+import NewTask from "../CreateTask/NewTask";
 
 const TaskUI = ({ setActiveButton }) => {
   const [cardActive, setCardActive] = useState(false);
+  const [createTaskCard, setCreateTaskCard] = useState(false);
   return (
     <div id="task-ui">
       <IoCloseOutline
@@ -17,7 +19,9 @@ const TaskUI = ({ setActiveButton }) => {
         <div id="add-new">
           <div className="new-task-card">
             <h4>New task</h4>
-            <BsFillArrowUpRightCircleFill />
+            <BsFillArrowUpRightCircleFill
+              onClick={() => setCreateTaskCard(true)}
+            />
           </div>
           <div className="new-project-card">
             <h4>New project</h4>
@@ -36,7 +40,13 @@ const TaskUI = ({ setActiveButton }) => {
           Choose one of the options to continue
         </h3>
       </div>
-      {cardActive && <TasksForm setActiveButton={setActiveButton} />}
+      {cardActive && (
+        <TasksForm
+          setActiveButton={setActiveButton}
+          inputProject="New project"
+        />
+      )}
+      {createTaskCard && <NewTask setCreateTaskCard={setCreateTaskCard} />}
     </div>
   );
 };

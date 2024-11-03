@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./ProjectForm.css";
 import { useForm } from "react-hook-form";
-import { useAuth } from "../../AuthProvider";
 import MembersList from "../Members-List/MembersList";
 
 const ProjectForm = ({ setAddTask, setActiveButton, inputProject }) => {
-  const { currentUser } = useAuth();
   const [disabled, setDisabled] = useState(false);
   console.log(disabled, "disabledstatee");
   const [list, setList] = useState(false);
@@ -22,20 +20,6 @@ const ProjectForm = ({ setAddTask, setActiveButton, inputProject }) => {
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
-
-  // const handleCreateProject = async (data) => {
-  //   try {
-  //     await addDoc(collection(db, "tasks"), {
-  //       projectName: data?.projectName,
-  //       // taskDescription: data?.taskdescription,
-  //       userId: currentUser?.uid,
-  //       backgroundColor: backgroundColor,
-  //       taskCompleted: "20%",
-  //     });
-  //   } catch (error) {
-  //     console.log("Error creating task: ", error.message);
-  //   }
-  // };
 
   useEffect(() => {
     const isProjectName = projectName?.trim();

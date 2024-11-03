@@ -1,0 +1,12 @@
+.react-datepicker__input-container {
+  color: #767685;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.react-datepicker__input-container input {
+  background-color: transparent;
+  font-weight: 700;
+  outline: none;
+}

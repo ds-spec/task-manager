@@ -6,6 +6,7 @@ import Calendar from "react-calendar";
 import "./ProfileTime.css";
 import TasksForm from "../Project-Form/ProjectForm";
 import { useAuth } from "../../AuthProvider";
+import ProjectForm from "../Project-Form/ProjectForm";
 
 const ProfileTime = () => {
   const { currentUser } = useAuth();
@@ -44,7 +45,7 @@ const ProfileTime = () => {
           Add Task
         </button>
       </div>
-      {addTask && <TasksForm setAddTask={setAddTask} />}
+      {addTask && <ProjectForm setAddTask={setAddTask} />}
     </div>
   );
 };
