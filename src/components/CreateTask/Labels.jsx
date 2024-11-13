@@ -4,7 +4,6 @@ import TagsModal from "./TagsModal";
 
 const Labels = () => {
   const [openModal, setOpenModal] = useState(false);
-  console.log("open modal state", openModal);
   const labels = [
     {
       labelName: "UI Design",
