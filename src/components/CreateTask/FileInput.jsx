@@ -3,12 +3,11 @@ import FileAttachment from "./FileAttachment";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { FilePond, registerPlugin } from "react-filepond";
 import "filepond/dist/filepond.min.css";
-import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
-import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import { LuDownload } from "react-icons/lu";
+import "./Files.css";
 
 // Register plugins for preview functionality
-registerPlugin(FilePondPluginImagePreview, FilePondPluginFileValidateType);
+// registerPlugin(FilePondPluginImagePreview, FilePondPluginFileValidateType);
 
 const FileInput = () => {
   const [files, setFiles] = useState([]);
@@ -47,6 +46,28 @@ const FileInput = () => {
     console.log(fileItems, "itemss");
     setFiles(fileItems.map((fileItem) => fileItem.file));
   };
+  // const handleUpdateFiles = (fileItems) => {
+  //   setFiles(fileItems);
+  // };
+
+  // Function to download file
+  const downloadFile = (file) => {
+    // Create a URL for the file
+    const url = URL.createObjectURL(file);
+
+    // Create a temporary link element
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = file.name; // Set the file name
+
+    // Append link, click it, and remove it
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // Clean up the URL
+    URL.revokeObjectURL(url);
+  };
   return (
     // <div>
     //   <div>
@@ -77,89 +98,31 @@ const FileInput = () => {
     //     </div>
     //   </div>
     // </div>
-    // <FilePond
-    //   files={files}
-    //   onupdatefiles={handleFileSelection}
-    //   allowMultiple={true}
-    //   maxFiles={3}
-    //   name="files"
-    //   // server="/api/upload"
-    //   labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-    //   imagePreviewHeight={200}
-    //   // Specify accepted file types
-    //   acceptedFileTypes={[
-    //     "image/png",
-    //     "image/jpeg",
-    //     "application/pdf",
-    //     "application/msword",
-    //     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    //   ]}
-    //   // File type validation messages
-    //   labelFileTypeNotAllowed="Invalid file type"
-    //   fileValidateTypeLabelExpectedTypes="Expects: {allTypes}"
-    //   // Preview settings
-    //   stylePanelLayout="integrated"
-    //   // Show file size
-    //   styleItemPanelAspectRatio={0.5}
-    //   // Custom styling for preview
-    //   imagePreviewTransparencyIndicator="grid"
-    //   // Custom file info
-    //   fileMetadataObject={{
-    //     markup: [
-    //       [
-    //         "div",
-    //         {
-    //           class: "custom-file-info",
-    //         },
-    //         [
-    //           ["span", {}, "${filesize}"],
-    //           ["span", {}, "${filename}"],
-    //         ],
-    //       ],
-    //     ],
-    //   }}
-    // />
     <div className="max-w-md">
       <FilePond
+        className="relative"
         files={files}
-        onupdatefiles={setFiles}
+        name="files"
+        onupdatefiles={handleFileSelection}
         allowMultiple={true}
         maxFiles={3}
-        // Enable image preview
-        imagePreviewHeight={200}
-        // Specify accepted file types
-        acceptedFileTypes={[
-          "image/png",
-          "image/jpeg",
-          "application/pdf",
-          "application/msword",
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        ]}
-        // File type validation messages
-        labelFileTypeNotAllowed="Invalid file type"
-        fileValidateTypeLabelExpectedTypes="Expects: {allTypes}"
-        // Preview settings
-        stylePanelLayout="integrated"
-        // Show file size
-        styleItemPanelAspectRatio={0.5}
-        // Custom styling for preview
-        imagePreviewTransparencyIndicator="grid"
-        // Custom file info
-        fileMetadataObject={{
-          markup: [
-            [
-              "div",
-              {
-                class: "custom-file-info",
-              },
-              [
-                ["span", {}, "${filesize}"],
-                ["span", {}, "${filename}"],
-              ],
-            ],
-          ],
-        }}
-      />
+        labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+      >
+        {files.length > 0 && (
+          <div className=" h-full pt-[46px]">
+            {files.map((fileItem, index) => (
+              <button
+                key={index}
+                onClick={() => downloadFile(fileItem)}
+                className="p-2 hover:bg-gray-500 rounded-full transition-colors"
+                title="Download file"
+              >
+                <LuDownload className="w-4 h-4 text-white" />
+              </button>
+            ))}
+          </div>
+        )}
+      </FilePond>
     </div>
   );
 };
