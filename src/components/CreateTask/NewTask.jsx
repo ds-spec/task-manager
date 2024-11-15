@@ -6,7 +6,7 @@ const NewTask = (setCreateTaskCard) => {
   return (
     <>
       <div class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
-      <div className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-[#FFFFFF] w-[60%] h-[90%] rounded-lg overflow-hidden">
+      <div className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-[#FFFFFF] w-[60%] h-[96%] rounded-lg overflow-hidden">
         <div className="modal-nav h-14"></div>
         <div className="w-full h-0.5 bg-[#F5F5F7] shadow-lg"></div>
         <div className="flex w-full h-full">

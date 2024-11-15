@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FileAttachment from "./FileAttachment";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { FilePond, registerPlugin } from "react-filepond";
@@ -68,62 +68,76 @@ const FileInput = () => {
     // Clean up the URL
     URL.revokeObjectURL(url);
   };
+
+  // useEffect(() => {
+  //   if (files.length > 0) {
+  //     // For each file, find its FilePond item and add download button
+  //     files.forEach((file, index) => {
+  //       const itemPanel = document.querySelectorAll(".filepond--file")[index];
+  //       if (itemPanel) {
+  //         const downloadBtn = document.createElement("button");
+  //         downloadBtn.className =
+  //           "absolute right-3 hover:bg-gray-500 rounded-full transition-colors";
+  //         downloadBtn.innerHTML = "<LuDownload />"; // Your download icon SVG
+  //         downloadBtn.style.width = "30px";
+  //         downloadBtn.style.height = "30px";
+  //         downloadBtn.onclick = () => downloadFile(file);
+  //         itemPanel.appendChild(downloadBtn);
+  //       }
+  //     });
+  //   }
+  // }, [files]);
+
+  useEffect(() => {
+    if (files.length > 0) {
+      files.forEach((file, index) => {
+        const itemPanel = document.querySelectorAll(".filepond--file")[index];
+        if (itemPanel) {
+          const downloadBtn = document.createElement("button");
+          downloadBtn.className =
+            "absolute right-3 hover:bg-gray-500 rounded-full transition-colors";
+          downloadBtn.style.width = "30px";
+          downloadBtn.style.height = "30px";
+          downloadBtn.style.display = "flex";
+          downloadBtn.style.alignItems = "center";
+          downloadBtn.style.justifyContent = "center";
+
+          // Create icon element
+          const icon = document.createElement("i");
+          icon.className = "w-4 h-4 text-white";
+          icon.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+          </svg>`;
+
+          downloadBtn.appendChild(icon);
+          downloadBtn.onclick = () => downloadFile(file);
+          itemPanel.appendChild(downloadBtn);
+        }
+      });
+    }
+  }, [files]);
   return (
-    // <div>
-    //   <div>
-    //     <div className="flex items-center gap-1">
-    //       <h2 className="text-black text-lg font-extrabold mb-3">
-    //         Attachments
-    //       </h2>
-    //       <h5 className="text-[#b2b2b2] text-[0.675rem] font-bold mb-2"></h5>
-    //     </div>
-    //     <hr />
-    //     <div className="relative text-black">
-    //       {selectFile && (
-    //         <FileAttachment
-    //           selectFile={selectFile}
-    //           onDownload={handleDownload}
-    //         />
-    //       )}
-    //       <input
-    //         type="file"
-    //         accept="image/png, image/jpeg"
-    //         className="relative top-1 w-full h-full inset-0 opacity-0 cursor-pointer"
-    //         onChange={handleFileSelection}
-    //       />
-    //       <div className="flex items-center gap-2 mt-2">
-    //         <AiOutlineCloudUpload className="text-3xl" />
-    //         <span className="text-black text-sm">Add Attachment</span>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-    <div className="max-w-md">
-      <FilePond
-        className="relative"
-        files={files}
-        name="files"
-        onupdatefiles={handleFileSelection}
-        allowMultiple={true}
-        maxFiles={3}
-        labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-      >
-        {files.length > 0 && (
-          <div className=" h-full pt-[46px]">
-            {files.map((fileItem, index) => (
-              <button
-                key={index}
-                onClick={() => downloadFile(fileItem)}
-                className="p-2 hover:bg-gray-500 rounded-full transition-colors"
-                title="Download file"
-              >
-                <LuDownload className="w-4 h-4 text-white" />
-              </button>
-            ))}
-          </div>
-        )}
-      </FilePond>
-    </div>
+    <>
+      <div>
+        <div className="flex items-center gap-1">
+          <h2 className="text-black text-lg font-extrabold mb-3">
+            Attachments
+          </h2>
+          <h5 className="text-[#b2b2b2] text-[0.675rem] font-bold mb-2"></h5>
+        </div>
+        <hr />
+      </div>
+      <div className="max-w-md">
+        <FilePond
+          files={files}
+          name="files"
+          onupdatefiles={handleFileSelection}
+          allowMultiple={true}
+          maxFiles={2}
+          labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+        />
+      </div>
+    </>
   );
 };
 

@@ -1,3 +1,16 @@
-.filepond--file {
+/* .filepond--file {
   position: relative;
+} */
+
+/* .filepond--panel.filepond--item-panel {
+  position: relative;
+}
+
+.file-item {
+  position: absolute;
+} */
+
+.filepond--root .filepond--drop-label {
+  min-height: 3.45em;
+  margin-bottom: 15px !important;
 }
