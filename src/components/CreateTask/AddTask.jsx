@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { AiFillEdit } from "react-icons/ai";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import "./TextEditor.css";
 
 const AddTask = () => {
   const [title, setTitle] = useState("");
@@ -26,13 +29,13 @@ const AddTask = () => {
     }
   };
   return (
-    <div className="bg-transparent border-2 rounded-lg border-[#eaeaeb] w-[29vw] h-36 flex flex-col px-2 py-1 relative">
+    <div className="bg-transparent border-2 rounded-lg border-[#eaeaeb] w-[29vw] py-2 h-52 flex flex-col relative">
       <textarea
         value={title}
         disabled={saved ? true : false}
         onChange={(e) => setTitle(e.target.value)}
         type="text"
-        className={`text-xl  break-words text-black font-semibold caret-black outline-none resize-none ${
+        className={`text-xl break-words px-2 h-[30px] text-black font-semibold caret-black outline-none resize-none ${
           saved ? "bg-transparent" : "bg-white"
         }`}
         placeholder="Title"
@@ -40,16 +43,22 @@ const AddTask = () => {
       ></textarea>
       {titleError && <p className="bg-red-600">Please fill the title</p>}
 
-      <textarea
+      <ReactQuill
         value={description}
         disabled={saved ? true : false}
-        onChange={(e) => setDescription(e.target.value)}
-        className={`text-md w-full h-full text-[#8b8b8b] text-sm break-words caret-black outline-none resize-none ${
+        onChange={setDescription}
+        className={`text-md w-full h-[65.6%] text-[#8b8b8b] text-md break-words rounded-b-xl caret-black outline-none resize-none ${
           saved ? "bg-transparent" : "bg-white"
         }`}
         placeholder="Description"
-        required="true"
-      ></textarea>
+        modules={{
+          toolbar: [
+            ["bold", "italic", "underline"],
+            [{ list: "ordered" }, { list: "bullet" }],
+          ],
+        }}
+      />
+
       {descriptionError && (
         <p className="bg-red-600">Please fill the description</p>
       )}
