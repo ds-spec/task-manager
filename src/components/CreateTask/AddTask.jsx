@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -41,18 +41,19 @@ const AddTask = () => {
         placeholder="Title"
         required="true"
       ></textarea>
-      {titleError && <p className="bg-red-600">Please fill the title</p>}
+      {titleError && <p className="text-red-600">Please fill the title</p>}
 
       <ReactQuill
         value={description}
-        disabled={saved ? true : false}
         onChange={setDescription}
-        className={`text-md w-full h-[65.6%] text-[#8b8b8b] text-md break-words rounded-b-xl caret-black outline-none resize-none ${
+        className={`text-md w-full h-[65.6%] text-[#4d4d4d] break-words rounded-b-xl caret-black outline-none resize-none ${
           saved ? "bg-transparent" : "bg-white"
         }`}
         placeholder="Description"
         modules={{
           toolbar: [
+            [{ font: [] }],
+            [{ size: ["small", "medium", "large", "huge"] }],
             ["bold", "italic", "underline"],
             [{ list: "ordered" }, { list: "bullet" }],
           ],
@@ -60,7 +61,9 @@ const AddTask = () => {
       />
 
       {descriptionError && (
-        <p className="bg-red-600">Please fill the description</p>
+        <p className="text-red-600 absolute top-28 left-4 description">
+          Please fill the description
+        </p>
       )}
       {saved ? (
         <AiFillEdit
@@ -77,7 +80,8 @@ const AddTask = () => {
           </button>
           <button
             onClick={handleSave}
-            className="bg-[#3150FD] text-white rounded-md px-6 py-1 text-sm font-bold"
+            className="bg-[#3150FD] disabled:bg-[#a6a6a6] text-white rounded-md px-6 py-1 text-sm font-bold"
+            disabled={title.trim() === "" ? true : false}
           >
             Save
           </button>

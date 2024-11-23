@@ -10,18 +10,22 @@ import { IoMenu } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
 import MainTop from "../Main/Main";
 import TaskUI from "../Task-UI/TaskUI";
+import TimerUI from "../ProjectTimer/TimerUI";
 
 const Dashboard = () => {
-  const [activeButton, setActiveButton] = useState(false);
+  const [showTaskUI, setShowTaskUI] = useState(false);
+  const [showTimerUI, setShowTimerUI] = useState(false);
+  const [activeIcon, setActiveIcon] = useState(null);
   const [time, setTime] = useState(new Date());
 
+  // Handle time update
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = setInterval(() => {
       setTime(new Date());
     }, 100);
 
-    return () => clearTimeout(timer);
-  }, [time]);
+    return () => clearInterval(timer);
+  }, []);
 
   const formatTime = (date) => {
     return date.toLocaleTimeString([], {
@@ -31,29 +35,64 @@ const Dashboard = () => {
     });
   };
 
+  // Common icon style class
+  const iconClass =
+    "text-black w-10 h-10 p-2 -ml-2 transition-all duration-300 cursor-pointer";
+
+  // Handle icon click
+  const handleIconClick = (iconName) => {
+    setActiveIcon(iconName);
+  };
+
   return (
     <div id="main">
       <div id="nav-left">
+        {/* Top Navigation */}
         <div id="nav-top">
           <h5>{formatTime(time)}</h5>
-          <IoMenu className="hover:bg-[#FFD9E6] text-black w-10 h-10 p-2 -ml-2 rounded-lg transition-all duration-300" />
+          <IoMenu
+            className={`${iconClass} hover:bg-[#FFD9E6] rounded-lg`}
+            onClick={() => handleIconClick("menu")}
+          />
           <IoMdAdd
-            className="hover:bg-[#FFD9E6] text-black w-10 h-10 p-2 -ml-2 rounded-lg transition-all duration-300"
-            onClick={() => setActiveButton(true)}
+            className={`${iconClass} hover:bg-[#FFD9E6] rounded-lg`}
+            onClick={() => setShowTaskUI(true)}
           />
         </div>
+
+        {/* Bottom Navigation */}
         <div id="nav-bottom">
-          <LiaTasksSolid className="hover:bg-[#D9DDFF] text-black w-10 h-10 p-2 -ml-2 rounded-full cursor-pointer transition-all duration-300" />
-          <FaRegFolderOpen className="hover:bg-[#D9DDFF] text-black w-10 h-10 p-2 -ml-2 rounded-full cursor-pointer transition-all duration-300" />
-          <IoCalendarClearOutline className="hover:bg-[#D9DDFF] text-black w-10 h-10 p-2 -ml-2 rounded-full cursor-pointer transition-all duration-300" />
-          <RiNotification2Line className="hover:bg-[#D9DDFF] text-black w-10 h-10 p-2 -ml-2 rounded-full cursor-pointer transition-all duration-300" />
-          <PiTimerBold className="hover:bg-[#D9DDFF] text-black w-10 h-10 p-2 -ml-2 rounded-full cursor-pointer transition-all duration-300" />
-          <RiSettingsLine className="hover:bg-[#D9DDFF] text-black w-10 h-10 p-2 -ml-2 rounded-full cursor-pointer transition-all duration-300" />
+          <LiaTasksSolid
+            className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
+            // onClick={() => handleIconClick("tasks")}
+          />
+          <FaRegFolderOpen
+            className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
+            onClick={() => handleIconClick("folder")}
+          />
+          <IoCalendarClearOutline
+            className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
+            onClick={() => handleIconClick("calendar")}
+          />
+          <RiNotification2Line
+            className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
+            onClick={() => handleIconClick("notification")}
+          />
+          <PiTimerBold
+            className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
+            onClick={() => setShowTimerUI(true)}
+          />
+          <RiSettingsLine
+            className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
+            onClick={() => handleIconClick("settings")}
+          />
         </div>
       </div>
+
       <div id="line"></div>
       <MainTop />
-      {activeButton && <TaskUI setActiveButton={setActiveButton} />}
+      {showTaskUI && <TaskUI setActiveButton={setShowTaskUI} />}
+      {showTimerUI && <TimerUI setActiveButton={setShowTimerUI} />}
     </div>
   );
 };

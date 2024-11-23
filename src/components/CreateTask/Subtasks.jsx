@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiEdit3 } from "react-icons/fi";
 
 const Subtasks = () => {
+  const [edit, setEdit] = useState("");
+  // console.log(edit);
+  // const [text, setText] = useState("");
+  const handleEdit = (e) => {
+    setEdit(e.target.value);
+  };
   const subtasksArr = [
     {
       id: 1,
@@ -35,7 +41,13 @@ const Subtasks = () => {
                   id={subtask.id}
                   className="text-black px-0 py-1 flex items-center gap-1"
                 >
-                  <input type="radio" className="cursor-pointer" />
+                  <input
+                    value={edit}
+                    onChange={(e) => setEdit(e.target.value)}
+                    disabled={false}
+                    type="radio"
+                    className="cursor-pointer"
+                  />
                   {subtask.task}
                 </li>
                 <FiEdit3 className="text-[#BFBFC8]" />
