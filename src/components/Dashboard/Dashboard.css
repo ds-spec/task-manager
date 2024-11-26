@@ -1,10 +1,10 @@
 #main {
-  min-height: 100vh;
+  /* min-height: 100vh;
   background-color: #edf0ff;
   color: #fff;
   padding: 0.1px;
   display: grid;
-  grid-template-columns: 0fr 1.8fr;
+  grid-template-columns: 0fr 1.8fr; */
 }
 
 #nav-left {

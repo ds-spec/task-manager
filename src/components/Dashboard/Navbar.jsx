@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./Dashboard.css";
 import { LiaTasksSolid } from "react-icons/lia";
 import { FaRegFolderOpen } from "react-icons/fa";
 import { IoCalendarClearOutline } from "react-icons/io5";
@@ -8,15 +7,15 @@ import { PiTimerBold } from "react-icons/pi";
 import { RiSettingsLine } from "react-icons/ri";
 import { IoMenu } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
-import MainTop from "../Main/Main";
 import TaskUI from "../Task-UI/TaskUI";
-import TimerUI from "../ProjectTimer/TimerUI";
+import { useNavigate } from "react-router-dom";
 
-const Dashboard = () => {
+const Navbar = () => {
   const [showTaskUI, setShowTaskUI] = useState(false);
   const [showTimerUI, setShowTimerUI] = useState(false);
   const [activeIcon, setActiveIcon] = useState(null);
   const [time, setTime] = useState(new Date());
+  const navigate = useNavigate();
 
   // Handle time update
   useEffect(() => {
@@ -43,7 +42,6 @@ const Dashboard = () => {
   const handleIconClick = (iconName) => {
     setActiveIcon(iconName);
   };
-
   return (
     <div id="main">
       <div id="nav-left">
@@ -80,7 +78,7 @@ const Dashboard = () => {
           />
           <PiTimerBold
             className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
-            onClick={() => setShowTimerUI(true)}
+            onClick={() => navigate("/dashboard/timer")}
           />
           <RiSettingsLine
             className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
@@ -90,11 +88,11 @@ const Dashboard = () => {
       </div>
 
       <div id="line"></div>
-      <MainTop />
+      {/* <MainTop /> */}
       {showTaskUI && <TaskUI setActiveButton={setShowTaskUI} />}
       {/* {showTimerUI && <TimerUI setActiveButton={setShowTimerUI} />} */}
     </div>
   );
 };
 
-export default Dashboard;
+export default Navbar;

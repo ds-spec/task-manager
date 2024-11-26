@@ -4,7 +4,6 @@ import { IoMdArrowBack } from "react-icons/io";
 import { RiUserAddLine } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import assets from "../../assets/assets";
-import Tasks from "../Tasks-Details/Tasks";
 import TaskCard from "../Task-Card/TaskCard";
 import MainBottom from "../MainBottom/MainBottom";
 
