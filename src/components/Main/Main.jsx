@@ -6,12 +6,13 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import assets from "../../assets/assets";
 import TaskCard from "../Task-Card/TaskCard";
 import MainBottom from "../MainBottom/MainBottom";
+import Mainheader from "./Mainheader";
 
 const MainTop = () => {
   return (
     <div id="main-head">
       <div id="main-top">
-        <div id="user-actions">
+        {/* <div id="user-actions">
           <IoMdArrowBack />
           <div id="add-menu">
             <h4>
@@ -19,15 +20,16 @@ const MainTop = () => {
             </h4>
             <BsThreeDotsVertical />
           </div>
-        </div>
-        <div id="workboard-bar">
+        </div> */}
+        {/* <div id="workboard-bar">
           <h1>Product workboard</h1>
           <div id="search-bar">
             <img src={assets.search} alt="" />{" "}
             <input type="text" placeholder="Search" />
           </div>
         </div>
-        <div id="main-line"></div>
+        <div id="main-line"></div> */}
+        <Mainheader headerTitle={"Product Workboard"} />
       </div>
       <div id="main-center" className="min-h-80">
         <TaskCard />

@@ -37,12 +37,12 @@
   font-size: 1.2vw;
 }
 
-#workboard-bar {
+/* #workboard-bar {
   display: flex;
   gap: 45vw;
   align-items: center;
   margin-top: 1.8vw;
-}
+} */
 
 #workboard-bar h1 {
   font-size: 3.1vw;
