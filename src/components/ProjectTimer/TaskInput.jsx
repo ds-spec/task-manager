@@ -46,7 +46,26 @@ const TaskInput = () => {
       timeElapsed: "4h 15m",
     },
   ];
-  return <Mainheader headerTitle={"Time Tracking"} />;
+  return (
+    <>
+      <Mainheader headerTitle={"Time Tracking"} />
+      <div id="tasks-info" className="flex gap-8 mt-8">
+        {progressStates?.map((progress, index) => (
+          <div className={`bg-white w-64 h-48 rounded-xl px-4 py-6`}>
+            <div className="flex flex-col justify-center gap-2">
+              <h1 className="text-black text-xl">{progress.name}</h1>
+              <h3 className="text-black text-4xl font-bold">
+                {progress.action}
+              </h3>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="tasks-timer">
+        
+      </div>
+    </>
+  );
 };
 
 export default TaskInput;

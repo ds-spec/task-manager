@@ -61,7 +61,8 @@ const Navbar = () => {
         {/* Bottom Navigation */}
         <div id="nav-bottom">
           <LiaTasksSolid
-            className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
+            className={`${iconClass} hover:bg-[#D9DDFF] rounded-full active:bg-red-400`}
+            onClick={() => navigate("/dashboard/overview")}
             // onClick={() => handleIconClick("tasks")}
           />
           <FaRegFolderOpen

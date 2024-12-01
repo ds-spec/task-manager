@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import TimerUI from "./components/ProjectTimer/TimerUI";
 import Navbar from "./components/Dashboard/Navbar";
 import MainTop from "./components/Main/Main";
+import Overview from "./components/Overview/Overview";
 
 // DashboardLayout.jsx
 function DashboardLayout() {
@@ -48,6 +49,7 @@ function App() {
             }
           />
           <Route path="/dashboard/timer" element={<TimerUI />} />
+          <Route path="/dashboard/overview" element={<Overview />} />
         </Route>
       </Routes>
     </BrowserRouter>
