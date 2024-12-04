@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import WorkloadChart from "./WorkloadOverview/WorkloadChart";
 import GoalsUI from "./Goals/GoalsUI";
+import MembersProgressUI from "./MembersProgress/MembersProgressUI";
 
 // const CircularProgress = ({
 //   percentage,
@@ -143,7 +144,7 @@ const Overview = () => {
   ];
   return (
     <>
-      <div className="w-full h-full p-[1.2vw_1vw]">
+      <div className="w-full h-screen p-[1.2vw_1vw]">
         <Mainheader headerTitle={"Overview"} />
         <div className="flex flex-col gap-8 mt-8 px-5">
           <div className="flex justify-between items-center gap-5">
@@ -180,14 +181,15 @@ const Overview = () => {
               </div>
             ))}
           </div>
-          <div className="flex gap-3">
-            <div className="w-[69%]">
+          <div className="flex gap-6">
+            <div className="w-[66%] h-fit">
               <WorkloadChart />
             </div>
-            <div className="w-[34%]">
+            <div className="w-[33%]">
               <GoalsUI />
             </div>
           </div>
+          <MembersProgressUI />
         </div>
       </div>
     </>
