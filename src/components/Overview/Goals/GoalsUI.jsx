@@ -30,7 +30,7 @@ const GoalsUI = () => {
   return (
     <div className="bg-white rounded-xl h-full px-7 py-5">
       <h3 className="text-4xl text-gray-900 font-medium">Goals</h3>
-      <div className="divide-y-[3px] divide-[#F5F6F9]">
+      <div className="divide-y-[3px] divide-[#F5F6F9] h-96 overflow-auto">
         {goals?.map((goal, index) => (
           <>
             <div key={index} className="px-2 py-4">

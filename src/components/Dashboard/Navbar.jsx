@@ -71,7 +71,7 @@ const Navbar = () => {
           />
           <IoCalendarClearOutline
             className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
-            onClick={() => handleIconClick("calendar")}
+            onClick={() => navigate("/dashboard/calendar")}
           />
           <RiNotification2Line
             className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
