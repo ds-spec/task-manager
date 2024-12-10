@@ -33,11 +33,14 @@ const Calendar = () => {
     const [titleValue, setTitleValue] = useState("");
     console.log(titleValue)
     const [events, setEvents] = useState([
-        {title: "Meeting", start: "2024-12-09T10:00:00", end: "2024-12-09T11:00:00", backgroundColor: "#4CAF50"}
+        {id: 0, title: "Meeting", start: "2024-12-09T10:00:00", end: "2024-12-09T11:00:00", backgroundColor: "#4CAF50"}
     ])
     console.log(events)
 
     const handleDateSelect = (selectInfo) => {
+        if (selectInfo.view.type === "dayGridMonth") {
+            return;
+        }
         setCardActive(true)
         setSelectedInfo(selectInfo)
     }
@@ -100,6 +103,14 @@ const Calendar = () => {
                             center: 'title',
                             right: 'dayGridMonth,timeGridWeek,timeGridDay',
                         }}
+                        buttonText={
+                            {
+                                dayGridMonth: "Month",
+                                timeGridWeek: "Week",
+                                timeGridDay: "Day",
+                                today: "Today",
+                            }
+                        }
                         eventTimeFormat={{
                             hour: 'numeric',
                             minute: '2-digit',
