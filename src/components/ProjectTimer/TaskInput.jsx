@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaPlayCircle } from "react-icons/fa";
+import { Timeline } from "vis-timeline";
 
 const TaskInput = () => {
   const [seconds, setSeconds] = useState(0);
+  const [stopTimer, setStopTimer] = useState(false);
 
   const handleTimer = () => {
+    // console.log("handleTimer");
     const timerInterval = setInterval(() => {
       setSeconds((prevSeconds) => prevSeconds + 1);
     }, 1000);
@@ -74,6 +77,14 @@ const TaskInput = () => {
     return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
   };
 
+  const items = [
+    {
+      start: new Date(2010, 7, 15),
+      end: new Date(2010, 8, 2), // end is optional
+      content: "Trajectory A",
+    },
+  ];
+
   return (
     <>
       <div
@@ -99,13 +110,16 @@ const TaskInput = () => {
           />
         </div>
         <div className="flex items-center gap-6">
-          <h1 className="text-2xl">{formatTime(seconds)}</h1>
-          <FaPlayCircle
+          <h1 className="text-3xl">{formatTime(seconds)}</h1>
+          <span
             onClick={handleTimer}
-            size={"2.2em"}
-            color="#6EB454"
-            cursor="pointer"
-          />
+            className="border-2 border-gray-300 rounded-full"
+          >
+            <FaPlayCircle size={"2.8em"} color="#6EB454" cursor="pointer" />
+          </span>
+        </div>
+        <div className="w-[70vh] h-[45vh] absolute top-[50%] left-[50%] shadow-xl backdrop-blur-lg -translate-x-[50%] -translate-y-[50%] bg-[#363838] rounded-xl">
+
         </div>
       </div>
     </>
