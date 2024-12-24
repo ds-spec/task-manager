@@ -3,7 +3,6 @@ import Home from "./components/HomePage/Home";
 import LoginForm from "./components/LoginForm/LoginForm";
 import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "./components/Dashboard/Dashboard";
-import TimerUI from "./components/ProjectTimer/TimerUI";
 import Navbar from "./components/Dashboard/Navbar";
 import MainTop from "./components/Main/Main";
 import Overview from "./components/Overview/Overview";
@@ -49,7 +48,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/dashboard/timer" element={<TimerUI />} />
           <Route path="/dashboard/overview" element={<Overview />} />
           <Route path="/dashboard/calendar" element={<Calendar />} />
         </Route>

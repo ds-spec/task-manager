@@ -77,10 +77,6 @@ const Navbar = () => {
             className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
             onClick={() => handleIconClick("notification")}
           />
-          <PiTimerBold
-            className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
-            onClick={() => navigate("/dashboard/timer")}
-          />
           <RiSettingsLine
             className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
             onClick={() => handleIconClick("settings")}

@@ -4,13 +4,11 @@ import { LiaTasksSolid } from "react-icons/lia";
 import { FaRegFolderOpen } from "react-icons/fa";
 import { IoCalendarClearOutline } from "react-icons/io5";
 import { RiNotification2Line } from "react-icons/ri";
-import { PiTimerBold } from "react-icons/pi";
 import { RiSettingsLine } from "react-icons/ri";
 import { IoMenu } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
 import MainTop from "../Main/Main";
 import TaskUI from "../Task-UI/TaskUI";
-import TimerUI from "../ProjectTimer/TimerUI";
 
 const Dashboard = () => {
   const [showTaskUI, setShowTaskUI] = useState(false);
@@ -77,10 +75,6 @@ const Dashboard = () => {
           <RiNotification2Line
             className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
             onClick={() => handleIconClick("notification")}
-          />
-          <PiTimerBold
-            className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
-            onClick={() => setShowTimerUI(true)}
           />
           <RiSettingsLine
             className={`${iconClass} hover:bg-[#D9DDFF] rounded-full`}
