@@ -141,9 +141,9 @@ const LoginForm = () => {
   };
 
   return (
-    <div id="loginpage">
-      <div id="login-form-div">
-        <img src={desert} alt="" />
+    <div className="bg-[#9FD4F0] h-screen flex justify-center p-9">
+      <div className="bg-[#2b2738] shadow-[0px_10px_15px_#000000a8] w-[80vw] h-[91vh] rounded-[15px] p-[10px_15px] flex gap-[25px]">
+        <img src={desert} alt="" className="w-1/2 rounded-lg" />
         {isCreating ? (
           <div className="lds-ripple">
             <div></div>
@@ -153,8 +153,11 @@ const LoginForm = () => {
           <form
             id="form"
             onSubmit={handleSubmit(isLogin ? handleLoginData : onSubmit)}
+            className="flex flex-col text-white p-[55px_35px] relative"
           >
-            <h1>{isLogin ? "Login your account" : "Create an account"}</h1>
+            <h1 className="text-[50px] font-[400] text-white">
+              {isLogin ? "Login your account" : "Create an account"}
+            </h1>
             {isLogin ? (
               <h4>
                 Don't have an account?{" "}

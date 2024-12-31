@@ -16,6 +16,7 @@ import p3 from "./p-3.jpg";
 import p4 from "./p-4.jpg";
 import p5 from "./p-5.jpg";
 import logo from "./logo.png";
+import video from "./video.mp4";
 
 const assets = {
   desert: deserts,
@@ -36,6 +37,7 @@ const assets = {
   user4: p4,
   user5: p5,
   logo: logo,
+  video: video,
 };
 
 export default assets;
