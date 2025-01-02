@@ -14,13 +14,16 @@ import { useNavigate } from "react-router-dom";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { setDoc, doc } from "firebase/firestore";
 
-// Seperate error message
-const ErrorMessage = ({ message }) => <h5 id="account-error">{message}</h5>;
+// Separate error message
+const ErrorMessage = ({ message }) => (
+  <h5 className="mt-14 text-lg font-normal flex items-center gap-4 text-red-500">
+    {message}
+  </h5>
+);
 
-// Seperate success message
-
+// Separate success message
 const SuccessMessage = ({ message }) => (
-  <h5 id="account-created">
+  <h5 className="mt-14 text-lg font-normal flex items-center gap-4 text-green-500">
     <FaSquareCheck />
     {message}
   </h5>
@@ -36,9 +39,7 @@ const LoginForm = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [invalidUser, setInvalidUser] = useState(false);
   const [userExists, setUserExists] = useState(false);
-  console.log(isAccount);
-  console.log(isError, "errorrrr");
-  console.log(invalidUser, "invalidUserinvalidUser");
+
   const {
     register,
     handleSubmit,
@@ -54,7 +55,7 @@ const LoginForm = () => {
       setIsAccount(true);
     }
     reset();
-    setTimeout(() => setIsAccount(false), 3000); // Display success for 3 seconds
+    setTimeout(() => setIsAccount(false), 3000);
   };
 
   const setError = (message, type) => {
@@ -74,45 +75,30 @@ const LoginForm = () => {
       setTimeout(() => {
         setUserExists(false);
       }, 3000);
-    } // Display error for 3 seconds
+    }
   };
 
   const switchToCreateAccount = (type) => {
-    if (type === "register") {
-      setIsLogin(false);
-    } else {
-      setIsLogin(true);
-    }
+    setIsLogin(type !== "register");
     reset();
   };
 
-  const onSubmit = async (data) => handleAuthAction(data, "register");
-  const handleLoginData = async (data) => handleAuthAction(data, "login");
-
   const handleAuthAction = async (data, action) => {
-    console.log(action, "actionsss");
     setIsCreating(true);
     const { email, password, firstName, secondName } = data;
-    console.log(data);
+
     try {
       const response =
         action === "register"
           ? await createUserWithEmailAndPassword(auth, email, password)
           : await signInWithEmailAndPassword(auth, email, password);
-      // console.log(response.user);
-      console.log(response.user.uid, "uid in response");
-      // console.log(response.user.uid,"uid in response");
-      // await setDoc(doc(db, "users", response.user.uid), {
-      //   displayName: firstName,
+
       if (action === "register") {
         await setDoc(doc(db, "users", response.user.uid), {
-          firstName: firstName,
+          firstName,
           lastName: secondName,
         });
       }
-
-      console.log(response.user.uid, "uid in response");
-      // }
 
       setSuccess(
         action === "register"
@@ -121,7 +107,6 @@ const LoginForm = () => {
         action
       );
     } catch (error) {
-      console.log(error.code, "codeerrro");
       if (error.code === "auth/email-already-in-use") {
         setUserExists(true);
       }
@@ -136,84 +121,95 @@ const LoginForm = () => {
     }
   };
 
+  const onSubmit = async (data) => handleAuthAction(data, "register");
+  const handleLoginData = async (data) => handleAuthAction(data, "login");
+
   const handleCheckboxChange = (e) => {
     setIsAgreed(e.target.checked);
   };
 
   return (
-    <div className="bg-[#9FD4F0] h-screen flex justify-center p-9">
-      <div className="bg-[#2b2738] shadow-[0px_10px_15px_#000000a8] w-[80vw] h-[91vh] rounded-[15px] p-[10px_15px] flex gap-[25px]">
-        <img src={desert} alt="" className="w-1/2 rounded-lg" />
+    <div className="bg-blue-300 h-screen flex justify-center p-9">
+      <div className="bg-[#2b2738] shadow-lg w-4/5 h-[91vh] rounded-lg p-4 flex gap-6">
+        <img src={desert} alt="" className="w-1/2 rounded-lg object-cover" />
         {isCreating ? (
-          <div className="lds-ripple">
-            <div></div>
-            <div></div>
+          <div className="absolute top-1/2 left-[70%] transform -translate-x-1/2 -translate-y-1/2 w-20 h-20">
+            <div className="absolute border-4 border-white opacity-100 rounded-full animate-spin"></div>
+            <div className="absolute border-4 border-white opacity-100 rounded-full animate-spin"></div>
           </div>
         ) : (
           <form
-            id="form"
             onSubmit={handleSubmit(isLogin ? handleLoginData : onSubmit)}
-            className="flex flex-col text-white p-[55px_35px] relative"
+            className="flex flex-col text-white p-14 relative w-[40%]"
           >
-            <h1 className="text-[50px] font-[400] text-white">
+            <h1 className="text-4xl font-normal">
               {isLogin ? "Login your account" : "Create an account"}
             </h1>
             {isLogin ? (
-              <h4>
+              <h4 className="mt-6">
                 Don't have an account?{" "}
-                <span onClick={() => switchToCreateAccount("register")}>
+                <span
+                  onClick={() => switchToCreateAccount("register")}
+                  className="text-indigo-500 underline cursor-pointer"
+                >
                   Create Account
                 </span>
               </h4>
             ) : (
-              <h4>
+              <h4 className="mt-6">
                 Already have an account?{" "}
-                <span onClick={() => switchToCreateAccount("login")}>
+                <span
+                  onClick={() => switchToCreateAccount("login")}
+                  className="text-indigo-500 underline cursor-pointer"
+                >
                   Log in
                 </span>
               </h4>
             )}
-            <div id="input-div">
+            <div className="mt-12 flex flex-col gap-5">
               {!isLogin && (
-                <div id="name-div">
-                  <div className="name-error">
+                <div className="flex gap-5">
+                  <div>
                     <input
-                      id="username"
-                      type="text"
+                      className="p-2 border border-transparent bg-[#3B364C] text-white rounded focus:border-red"
                       placeholder="First Name"
                       {...register("firstName", { required: true })}
                     />
-                    {errors?.firstName?.type === "required" && (
-                      <p id="error">Please enter first name</p>
+                    {errors?.firstName && (
+                      <p className="text-red-500 text-sm mt-1">
+                        Please enter first name
+                      </p>
                     )}
                   </div>
-                  <div className="name-error">
+                  <div>
                     <input
-                      type="text"
+                      className="p-2 border border-transparent bg-[#3B364C] text-white rounded focus:border-[#9382BF]"
                       placeholder="Second Name"
                       {...register("secondName", { required: true })}
                     />
-                    {errors?.secondName?.type === "required" && (
-                      <p id="error"> Please enter second name</p>
+                    {errors?.secondName && (
+                      <p className="text-red-500 text-sm mt-1">
+                        Please enter second name
+                      </p>
                     )}
                   </div>
                 </div>
               )}
-              <div className="name-error">
+              <div>
                 <input
-                  type="email"
-                  // value={email}
+                  className="p-2 border border-transparent bg-[#3B364C] w-full text-white rounded focus:border-[#9382BF]"
                   placeholder="Enter your email"
-                  {...register("email", {
-                    required: "Please enter a valid email",
-                  })}
+                  {...register("email", { required: true })}
                 />
-                {errors?.email?.type === "required" && (
-                  <p id="error"> Please enter a valid email</p>
+                {errors?.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Please enter a valid email
+                  </p>
                 )}
               </div>
-              <div className="name-error">
+              <div>
                 <input
+                  className="p-2 border border-transparent bg-[#3B364C] w-full text-white rounded focus:border-[#9382BF]"
                   type="password"
                   placeholder="Enter your password"
                   {...register("password", {
@@ -224,34 +220,40 @@ const LoginForm = () => {
                     },
                   })}
                 />
-                {errors.password && <p id="error">{errors.password.message}</p>}
-                {invalidUser && <p id="error">Invalid username or password</p>}
+                {errors?.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.password.message}
+                  </p>
+                )}
+                {invalidUser && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Invalid username or password
+                  </p>
+                )}
               </div>
-              {/* <h5> */}
               {!isLogin && (
-                <div id="check-box-div">
+                <div className="flex items-center gap-2">
                   <input
-                    id="check"
+                    className="w-5 h-5"
                     type="checkbox"
                     onChange={handleCheckboxChange}
                   />
-                  <h5>
-                    I agree to the<span>Terms & Conditions</span>
+                  <h5 className="text-sm text-gray-400">
+                    I agree to the{" "}
+                    <span className="text-indigo-500">Terms & Conditions</span>
                   </h5>
                 </div>
               )}
-              {/* </h5> */}
             </div>
-            {isLogin ? (
-              <button type="submit">Login</button>
-            ) : (
-              <button disabled={!isAgreed} type="submit">
-                Create account
-              </button>
-            )}
-            {isAccount && (
-              <SuccessMessage message="Account Created Successfully" />
-            )}
+            <button
+              className={`mt-14 bg-indigo-600 py-4 px-2 rounded text-white text-sm ${
+                !isAgreed && !isLogin ? "opacity-20 cursor-not-allowed" : ""
+              }`}
+              disabled={!isAgreed && !isLogin}
+            >
+              {isLogin ? "Login" : "Create account"}
+            </button>
+            {isAccount && <SuccessMessage message="Account Created Successfully" />}
             {isError && <ErrorMessage message="Something went wrong" />}
             {userExists && (
               <ErrorMessage message="Email is already in use. Please use a different email or log in." />
