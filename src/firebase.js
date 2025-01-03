@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -14,7 +15,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
+
+provider.setCustomParameters({
+  prompt: "select_account",
+});
 
 const auth = getAuth(app);
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export { auth, db };

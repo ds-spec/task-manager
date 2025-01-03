@@ -2,7 +2,7 @@ import "./LoginForm.css";
 import desert from "../../assets/desert.jpg";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { FaSquareCheck } from "react-icons/fa6";
+import { FaGithub, FaSquareCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 import { auth, db } from "../../firebase";
 import {
@@ -13,6 +13,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { setDoc, doc } from "firebase/firestore";
+import { signInWithGooglePopup } from "../../firebase";
+import { FcGoogle } from "react-icons/fc";
 
 // Separate error message
 const ErrorMessage = ({ message }) => (
@@ -81,6 +83,11 @@ const LoginForm = () => {
   const switchToCreateAccount = (type) => {
     setIsLogin(type !== "register");
     reset();
+  };
+
+  const logGoogleUser = async () => {
+    const response = await signInWithGooglePopup();
+    console.log(response);
   };
 
   const handleAuthAction = async (data, action) => {
@@ -246,18 +253,40 @@ const LoginForm = () => {
               )}
             </div>
             <button
-              className={`mt-14 bg-indigo-600 py-4 px-2 rounded text-white text-sm ${
+              className={`mt-10 bg-indigo-600 py-3 px-2 rounded text-white text-sm ${
                 !isAgreed && !isLogin ? "opacity-20 cursor-not-allowed" : ""
               }`}
               disabled={!isAgreed && !isLogin}
             >
               {isLogin ? "Login" : "Create account"}
             </button>
-            {isAccount && <SuccessMessage message="Account Created Successfully" />}
+            {isAccount && (
+              <SuccessMessage message="Account Created Successfully" />
+            )}
             {isError && <ErrorMessage message="Something went wrong" />}
             {userExists && (
               <ErrorMessage message="Email is already in use. Please use a different email or log in." />
             )}
+            <div className="flex gap-4 justify-center mt-8">
+              <button
+                className="border-2 px-10 py-2 flex items-center gap-3 hover:border-white transition-colors border-[#656070] rounded"
+                onClick={logGoogleUser}
+              >
+                <span>
+                  <FcGoogle size={"1.4em"} />
+                </span>
+                Google
+              </button>
+              <button
+                className="border-2 flex items-center gap-3 px-10 hover:border-white transition-colors py-2 border-[#656070] rounded"
+                onClick={logGoogleUser}
+              >
+                <span>
+                  <FaGithub size={"1.4em"} />
+                </span>
+                Github
+              </button>
+            </div>
           </form>
         )}
       </div>
